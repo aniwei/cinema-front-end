@@ -1,0 +1,30 @@
+{
+  "id": "1981927",
+  "name": "cinema",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1261596",
+      "name": "facebook",
+      "font_class": "facebook",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "7239513",
+      "name": "instagram",
+      "font_class": "instagram",
+      "unicode": "e6fc",
+      "unicode_decimal": 59132
+    },
+    {
+      "icon_id": "14343885",
+      "name": "youtube",
+      "font_class": "youtube",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

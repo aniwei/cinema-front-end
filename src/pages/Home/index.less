@@ -1,0 +1,75 @@
+.home {
+  background-color: #fff;
+  overflow: hidden;
+
+  .title {
+    color: #282828;
+    text-align: center;
+
+    h3 {
+      font-weight: lighter;
+      font-size: 35px;
+      color: #763f00;
+    }
+
+    h5 {
+      color: #737373;
+      font-size: 17px;
+      margin: 18px 0 0;
+      font-weight: 400;
+    }
+  }
+
+  .programme {
+    margin: auto;
+    overflow: hidden;
+    background: url(../../assets/common/index_background.jpg) no-repeat left bottom #f6f4ee;
+
+    .title {
+      text-align: left;
+    }
+
+    .content {
+      min-height: 300px;
+      width: 1280px;
+    }
+    
+
+    .line {
+      margin: 0 10px;
+    }
+
+  }
+
+  .message {
+    margin: 50px 0;
+
+    .content {
+      margin: auto;
+      min-height: 100px;
+      width: 960px;
+      border-left: 1px solid #763f00;
+      border-right: 1px solid #763f00;
+      position: relative;
+    }
+
+    .content::after,
+    .content::before {
+      content: "";
+      height: 50px;
+      position: absolute;
+      width: 1px;
+      background-color: #763f00;;
+      top: 0;
+      left: 0;
+      transform: rotate(35deg);
+    }
+
+    .content::after {
+      right: 0;
+      top: auto;
+      bottom: 0;
+      left: auto;
+    }
+  } 
+}
