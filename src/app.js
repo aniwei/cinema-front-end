@@ -1,3 +1,5 @@
+import style from './assets/style/style.less'
+
 export const dva = {
   config: {
     onError(err) {
