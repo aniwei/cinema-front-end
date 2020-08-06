@@ -19,16 +19,28 @@ export default {
           ]
         },
       ],
+    }, {
       path: '/about',
-      component: '../layouts/PageLayout',
+      component: '../layouts/BasicLayout',
       routes: [
         {
           path: '/about',
           component: './About'
         }
       ],
-    },
-    {
+    }, {
+      path: '/news',
+      component: '../layouts/PageLayout',
+      routes: [
+        {
+          path: '/news',
+          component: './News'
+        }, {
+          path: '/news/:newId',
+          component: './News/Detail'
+        }
+      ],
+    }, {
       path: '/',
       component: '../layouts/BasicLayout',
       routes: [
