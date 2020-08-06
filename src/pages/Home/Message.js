@@ -38,6 +38,24 @@ export default function Message (props) {
                 </div>
               </a>
             </li>
+
+            <li>
+              <a className={styles['message-item-link']} href="">
+                <div className={styles['message-item-hd']}>
+                  <div className={styles['message-item-date']}>06-06</div>
+                  <h3 className={styles['message-item-tit']}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h3>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a className={styles['message-item-link']} href="">
+                <div className={styles['message-item-hd']}>
+                  <div className={styles['message-item-date']}>06-06</div>
+                  <h3 className={styles['message-item-tit']}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h3>
+                </div>
+              </a>
+            </li>
           </ul>
           <Loading />
         </div>

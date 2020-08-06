@@ -5,30 +5,42 @@ export default {
   treeShaking: true,
   routes: [
     {
-      path: '/programmes',
+      path: '/programme',
       component: '../layouts/PageLayout',
       routes: [
         {
-          path: '/programmes',
+          path: '/programme',
           routes: [
             {
-              path: '/programmes',
-              name: 'programmes',
-              component: './Programmes'
+              path: '/programme',
+              name: 'programme',
+              component: './Programme'
             }
           ]
         },
       ],
+    }, {
       path: '/about',
-      component: '../layouts/PageLayout',
+      component: '../layouts/BasicLayout',
       routes: [
         {
           path: '/about',
           component: './About'
         }
       ],
-    },
-    {
+    }, {
+      path: '/news',
+      component: '../layouts/BasicLayout',
+      routes: [
+        {
+          path: '/news',
+          component: './News'
+        }, {
+          path: '/news/:newId',
+          component: './News/Detail'
+        }
+      ],
+    }, {
       path: '/',
       component: '../layouts/BasicLayout',
       routes: [

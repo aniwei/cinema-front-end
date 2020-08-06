@@ -11,11 +11,17 @@ export default function () {
   return (
     <div className={styles.home}>
       <section className={styles.slides}>
-        <img src="https://konsept.qodeinteractive.com/wp-content/uploads/2020/03/Home1_rev1.jpg" />
+        <div className={styles.slide}>
+
+          <div className={styles.inner}>
+            <div className={styles.content}>
+              <h3>恋爱．电影馆修缮工程通知</h3>
+            </div>
+          </div>
+        </div>
       </section>
 
       <Programme />
-
       <Message />
     </div>
   );

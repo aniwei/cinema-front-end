@@ -36,20 +36,179 @@
     }
   }
 
+  .slides {
+    height: 500px;  
+    .slide {
+      background: url(https://konsept.qodeinteractive.com/wp-content/uploads/2020/03/Home1_rev1.jpg) center center no-repeat;
+      background-size: cover;
+      height: 700px;  
+
+      .inner {
+        margin: auto;
+        width: 1280px;
+
+        .content {
+          position: absolute; 
+          color: #fff;
+          bottom: 250px;
+    
+          h3 { 
+            padding: 10px;  
+            margin: 0; 
+            font-size: 40px;
+            font-weight: normal;
+            margin-top: 20px;
+            background-color: #f8b5b3;   
+            
+          }
+
+          p {
+            padding: 10px;  
+            font-size: 20px;
+            margin: 0;
+            background-color: #763f00;   
+          }
+        }
+      }
+    }
+  }
+
+
   .programme {
     margin: auto;
     overflow: hidden;
-    background: url(../../assets/common/index_background.jpg) no-repeat left bottom #f6f4ee;
+    position: relative;
+    // background: url(../../assets/common/index_background.jpg) no-repeat left top #f6f4ee;
+
+    .programme_content {
+      width: 1280px;
+      margin: auto;
+      // background-color: #763f00;
+      // background-color: #ffffff;
+      background: url(../../assets/common/index_background.jpg) no-repeat left top #f6f4ee;
+      padding: 50px;
+      box-sizing: border-box;
+      
+    }
+
+    .line {
+      width: 2px;
+      height: 40px;
+      background-color: #fff;
+      transform: rotate(15deg);
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      color: #282828;
+      font-weight: normal;
+      font-size: 35px;
+      text-align: center;
+      justify-content: center;
+  
+      .tab:hover,
+      .tab.active {
+        color: #fff;
+      }
+  
+      .tab {
+        color: #999;
+        cursor: pointer;
+      }
+    }
 
     .title {
       text-align: left;
+      width: 1280px;
     }
 
     .content {
-      min-height: 300px;
-      width: 1280px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 50px;
+      padding: 0 50px;
     }
     
+    .movie {
+      width: 300px;
+      height: 416px;
+      box-shadow: 0 0 10.28px 1.72px rgba(0,0,0,.03);
+      position: relative;
+
+      .movie_inner {
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+
+        .movie_detail {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ad8362;
+          padding: 20px;
+
+          h4 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: normal;
+          }
+
+          p {
+            margin: 0;
+            margin-top: 10px;
+            color: #c2c2c2;
+            font-size: 16px;
+          }
+        }
+
+        .count {
+          color: #c2c2c2;
+          font-size: 16px;
+        }
+
+        .price {
+          color: #000;
+          font-size: 16px;
+          margin-left: 10px;
+        }
+
+        .movie_data {
+          margin-top: 30px;
+          text-align: right;
+        }
+      }
+
+      &:hover {
+        .movie_layer {
+          display: flex;
+        }
+      }
+
+      .movie_layer {
+        position: absolute;
+        background-color: rgba(255, 255, 255, .7);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        .buy {
+          background-color:  #763f00;
+          color: #fff;
+          height: 30px;
+          width: 70px;
+          border-radius: 30px
+        }
+      }
+    }
 
     .line {
       margin: 0 10px;
