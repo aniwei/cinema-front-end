@@ -1,5 +1,5 @@
 .home {
-  background-color: #fff;
+  background-color: #f6f4ee;
   overflow: hidden;
 
   .section {
@@ -80,140 +80,77 @@
     position: relative;
     // background: url(../../assets/common/index_background.jpg) no-repeat left top #f6f4ee;
 
-    .programme_content {
+    .content {
       width: 1280px;
       margin: auto;
-      // background-color: #763f00;
-      // background-color: #ffffff;
-      background: url(../../assets/common/index_background.jpg) no-repeat left top #f6f4ee;
-      padding: 50px;
-      box-sizing: border-box;
+      background-color: #dcb239;
+      display: flex;
       
-    }
 
-    .line {
-      width: 2px;
-      height: 40px;
-      background-color: #fff;
-      transform: rotate(15deg);
-    }
+      .album {
+        width: 400px;
+        font-size: 0;
 
-    .tabs {
-      display: flex;
-      align-items: center;
-      color: #282828;
-      font-weight: normal;
-      font-size: 35px;
-      text-align: center;
-      justify-content: center;
-  
-      .tab:hover,
-      .tab.active {
-        color: #fff;
+        .image {
+          width: 400px;
+        }
       }
-  
-      .tab {
-        color: #999;
-        cursor: pointer;
-      }
-    }
 
-    .title {
-      text-align: left;
-      width: 1280px;
-    }
+      .detail {
+        flex: 1;
+        margin-left: 50px;
+        .title {
+          font-size: 60px;
 
-    .content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 50px;
-      padding: 0 50px;
-    }
-    
-    .movie {
-      width: 300px;
-      height: 416px;
-      box-shadow: 0 0 10.28px 1.72px rgba(0,0,0,.03);
-      position: relative;
-
-      .movie_inner {
-        position: relative;
-
-        img {
-          width: 100%;
+          color: #fff;
+          margin: 50px 0 10px;
+          text-align: left;
         }
 
-        .movie_detail {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: #ad8362;
-          padding: 20px;
-
-          h4 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: normal;
-          }
-
-          p {
-            margin: 0;
-            margin-top: 10px;
-            color: #c2c2c2;
-            font-size: 16px;
-          }
+        .sub_title {
+          font-size: 30px;
+          color: #eee;
         }
 
-        .count {
-          color: #c2c2c2;
-          font-size: 16px;
-        }
-
-        .price {
-          color: #000;
-          font-size: 16px;
-          margin-left: 10px;
-        }
-
-        .movie_data {
+        .data {
           margin-top: 30px;
-          text-align: right;
+
+          .item {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 10px;
+
+            .label {
+              font-weight: bold;
+              color: #eee;
+              padding-right: 10px;
+            }
+          }
+        }
+
+        .brief {
+          color: #fff;
+          font-size: 18px;
+          line-height: 1.5;
+          margin-top: 50px;
         }
       }
 
-      &:hover {
-        .movie_layer {
-          display: flex;
-        }
-      }
-
-      .movie_layer {
-        position: absolute;
-        background-color: rgba(255, 255, 255, .7);
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: none;
+      .actions {
+        margin-left: 50px;
+        display: flex;
         justify-content: center;
         align-items: center;
 
         .buy {
-          background-color:  #763f00;
+          background-color: #763f00;
+          font-size: 30px;
+          padding: 20px 80px;;
+          margin-right: 50px;
           color: #fff;
-          height: 30px;
-          width: 70px;
-          border-radius: 30px
         }
       }
     }
-
-    .line {
-      margin: 0 10px;
-    }
-
   }
 
   .message {
