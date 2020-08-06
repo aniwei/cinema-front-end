@@ -6,7 +6,7 @@ export default {
   routes: [
     {
       path: '/programme',
-      component: '../layouts/PageLayout',
+      component: '../layouts/BasicLayout',
       routes: [
         {
           path: '/programme',
@@ -15,7 +15,17 @@ export default {
               path: '/programme',
               name: 'programme',
               component: './Programme'
-            }
+            }, 
+            {
+              path: '/programme',
+              routes: [
+                {
+                  path: '/programme/:programmeId',
+                  name: 'programme',
+                  component: './Programme/Detail'
+                }
+              ]
+            },
           ]
         },
       ],
