@@ -30,7 +30,7 @@ export default {
       ],
     }, {
       path: '/news',
-      component: '../layouts/PageLayout',
+      component: '../layouts/BasicLayout',
       routes: [
         {
           path: '/news',
