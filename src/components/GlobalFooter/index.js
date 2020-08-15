@@ -1,6 +1,8 @@
 import { Link } from 'umi';
 import styles from './index.less';
 
+import Arc from '../Arc';
+
 import logoIcm from '../../assets/customer/logo-icm.png';
 import logoCci from '../../assets/customer/logo-cci.png';
 import logoCcm from '../../assets/customer/logo-ccm.png';
@@ -8,6 +10,7 @@ import logoCcm from '../../assets/customer/logo-ccm.png';
 export default function () {
   return (
     <footer className={styles.footer}>
+      <Arc className={styles.arc} />
       <section className={`${styles['section']}`}>
         <div className={styles['section-inner']}>
           <div className={styles['customer']}>

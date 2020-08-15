@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { connect } from 'dva';
-import { GlobalHeader, GlobalFooter } from '../../components';
+import { GlobalHeader, GlobalFooter, GlobalContact } from '../../components';
 
 class BasicLayout extends PureComponent {
 
@@ -13,6 +13,7 @@ class BasicLayout extends PureComponent {
           {this.props.children}
         </main>
 
+        <GlobalContact />
         <GlobalFooter />
       </div>
     );

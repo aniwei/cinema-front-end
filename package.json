@@ -8,15 +8,24 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@antv/g2": "^4.0.13",
     "@apollo/client": "^3.0.1",
-    "dva": "^2.6.0-beta.6",
+    "@atlaskit/atlassian-navigation": "^0.11.1",
+    "@atlaskit/button": "^14.0.0",
+    "@atlaskit/checkbox": "^11.0.1",
+    "@atlaskit/editor-core": "^127.0.2",
+    "@atlaskit/form": "^8.1.0",
+    "@atlaskit/menu": "^0.6.0",
+    "@atlaskit/textfield": "^4.0.0",
+    "@atlaskit/theme": "^10.0.2",
     "graphql": "^15.3.0",
     "lodash.debounce": "^4.0.8",
     "p-timeout": "^3.2.0",
     "react": "^16.8.6",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.8.6",
-    "react-google-maps": "^9.4.5"
+    "react-google-maps": "^9.4.5",
+    "react-id-swiper": "^4.0.0",
+    "swiper": "^6.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",

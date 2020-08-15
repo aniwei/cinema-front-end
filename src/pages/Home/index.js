@@ -22,7 +22,6 @@ export default function () {
       </section>
 
       <Programme />
-      <Message />
     </div>
   );
 }

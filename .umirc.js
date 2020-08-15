@@ -5,6 +5,33 @@ export default {
   treeShaking: true,
   routes: [
     {
+      path: '/admin',
+      component: '../layouts/AdminLayout',
+      routes: [
+        {
+          path: '/admin',
+          routes: [
+            {
+              path: '/admin',
+              name: 'admin',
+              exact: true,
+              component: './Admin'
+            }, 
+            {
+              path: '/admin/user',
+              routes: [
+                {
+                  path: '/admin/user/signin',
+                  name: 'signIn',
+                  component: './Admin/User/SignIn'
+                }
+              ]
+            }, 
+          ]
+        }
+      ],
+    },
+    {
       path: '/programme',
       component: '../layouts/BasicLayout',
       routes: [

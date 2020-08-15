@@ -1,53 +1,196 @@
 .about {
+  background-color: #fff;  
+  position: relative;
+  z-index: 10;
+
   
 
-  .brief {
-    display: block;
+  .about_header {
     overflow: hidden;    
-    background: url(../../assets/common/background.jpg) left bottom no-repeat;
-    background-color: #f6f4ee;
+    background: url(../../assets/about/slides/slide_1.JPG);
+    background-size: cover;
     margin: auto;
+    
 
-    .brief_content {
-      background-attachment: fixed;
-      background: url(../../assets/common/index_background.jpg) right top no-repeat;
-      display: block;
-      text-align: left;
+    display: flex;
+
+
+    background-size: cover;
+    border-bottom-left-radius: 27%;
+
+    .background {
+      background: linear-gradient(to right,rgba(222, 238, 229, 1), rgba(222, 238, 229, .8));
+      width: 100%;
+    }
+
+    
+    .header_content {
+      padding: 160px 0 80px 0;
       width: 1280px;
-      line-height: 1.5;
+      margin: auto; 
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+
+      .description {
+  
+        img {
+          width: 300px;
+        }
+  
+        h1 {
+          margin-top: 50px;
+          font-size: 30px;
+          text-align: left;
+          width: 100%;
+          color: #763f00;
+        }
+    
+        p {
+          color: #763f00;
+          font-size: 20px;
+          line-height: 2;
+          margin-top: 30px;
+        }
+      }
+    }
+
+    .sildes {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      .slide {
+        height: 100%;
+
+        .image {
+          width: 100%;
+          height: 700px;
+          background-size: cover;
+        }
+
+        .background {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, .5);
+        }
+
+        .image:nth-child(0) {
+          background: url(../../assets/about/slides/slide_1.JPG);
+        }
+        .image:nth-child(1) {
+          background: url(../../assets/about/slides/slide_2.JPG);
+        }
+        .image:nth-child(2) {
+          background: url(../../assets/about/slides/slide_3.JPG);
+        }
+
+        .background {
+          background-color: ;
+        }
+      }
+    }
+  }
+
+
+  .features {
+    padding: 100px 0;
+    background-color: #fff;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-start;
+    width: 1280px;
+    margin: auto;
+    justify-content: center;
+
+    .feature.mission {
+      margin-right: 40px;
+    }
+
+    .feature.planning {
+      position: relative;
+    }
+
+   
+    .feature {
+      display: flex;
+      align-items: flex-start;
 
       h2 {
-        font-size: 2.5em;
-        color: #763f00;
-        width: 500px;
-        margin-left: 100px;
+        margin: 0 20px;
       }
 
       p {
-        color: #5d4d4d;
-        font-size: 1.5em;
-        width: 500px;
-        margin-left: 100px;
+        text-align: left;
+        line-height: 2;
       }
-  
-      img {
-        width: 300px;
-        margin-top: 100px;
-        margin-left: 100px;
-      }
+    }
+  }
 
+  .business {
+  
+    .content {
+      margin: auto;
+      padding: 50px 0;
+      background-color: rgba(255, 255, 255, .7);
+
+      h3 {
+        font-size: 30px;
+        font-weight: normal;
+
+        text-align: center;
+      }
     }
   }
 
   .map {
     position: relative;
 
-    .transport {
-      width: 1280px;
-      margin: auto;
-      position: absolute;
-      top: 0;
-      right: 0;
+    .iframe {
+      height: 600px;
+      border: none;
+      width: 100%;
     }
+
+    .content {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      width: 100%;
+      .transport {
+        width: 1280px;
+        margin: auto;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin: 50px auto;
+  
+        .location {
+          width: 500px;
+          font-size: 26px;
+          box-shadow: 0 0 15px rgba(0,0,0,.05);
+          background-color: #fcedee;
+          text-align: center;
+          padding: 20px;
+
+        }
+        h4 {
+          color: #bfbfbf;
+        }
+
+        .tools {
+          width: 500px;
+          box-shadow: 0 0 15px rgba(0,0,0,.05);
+          background-color: #fff;
+          flex: 1;
+          padding: 20px;
+        }
+      }
+    }
+
   }
 }
