@@ -10,18 +10,11 @@ import styles from './index.less';
 export default function () {
   return (
     <div className={styles.home}>
-      <section className={styles.slides}>
-        <div className={styles.slide}>
-
-          <div className={styles.inner}>
-            <div className={styles.content}>
-              <h3>恋爱．电影馆修缮工程通知</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <div className={styles.album}>
+        <img src="https://cinematheque.oss-cn-hongkong.aliyuncs.com/album/september.jpg" />
+      </div>
       <Programme />
+      <Message />
     </div>
   );
 }

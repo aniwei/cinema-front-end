@@ -6,7 +6,7 @@ import ErrorLink from './errorHandling';
 import enhancer from './enhancer';
 
 const httpLink = new HttpLink({
-  uri: serverConfig.uri,
+  uri: serverConfig.endpoint,
   headers: {
     'x-parse-javascript-key': appConfig.javascriptKey,
     'x-parse-application-id': appConfig.applicationId

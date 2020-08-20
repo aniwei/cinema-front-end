@@ -1,20 +1,19 @@
 import { PureComponent } from 'react';
 import { connect } from 'dva';
-import { GlobalHeader, GlobalFooter, GlobalContact } from '../../components';
+import { HeaderLayout, FooterLayout } from '../../components';
 
 class BasicLayout extends PureComponent {
 
   render() {
     return (
       <div>
-        <GlobalHeader {...this.props} />
+        <HeaderLayout {...this.props} />
 
         <main>
           {this.props.children}
         </main>
 
-        <GlobalContact />
-        <GlobalFooter />
+        <FooterLayout {...this.props} />
       </div>
     );
   }

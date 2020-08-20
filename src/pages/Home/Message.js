@@ -1,65 +1,27 @@
 import { formatMessage } from 'umi-plugin-react/locale';
+import { Link } from 'umi';
 import styles from './index.less';
-import Loading from '../../components/Loading';
 
 export default function Message (props) {
   return (
-    <section className={`${styles.message} ${styles['section']}`}>
-      <div className={styles['section-inner']}>
-        <div className={styles.title}>
-          <h3>{formatMessage({ id: 'home.message.title' })}</h3>
-          <h5>{formatMessage({ id: 'home.message.title.desc' })}</h5>
-        </div>
-        <div className={styles.content}>
-          <ul className={styles['message-list']}>
-            <li>
-              <a className={styles['message-item-link']} href="">
-                <div className={styles['message-item-hd']}>
-                  <div className={styles['message-item-date']}>07-01</div>
-                  <h3 className={styles['message-item-tit']}>恋爱．电影馆修缮工程通知</h3>
-                </div>
-              </a>
-            </li>
+    <section className={styles.message}>
 
-            <li>
-              <a className={styles['message-item-link']} href="">
-                <div className={styles['message-item-hd']}>
-                  <div className={styles['message-item-date']}>06-06</div>
-                  <h3 className={styles['message-item-tit']}>网站维护安排</h3>
-                </div>
-              </a>
-            </li>
-
-            <li>
-              <a className={styles['message-item-link']} href="">
-                <div className={styles['message-item-hd']}>
-                  <div className={styles['message-item-date']}>06-06</div>
-                  <h3 className={styles['message-item-tit']}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h3>
-                </div>
-              </a>
-            </li>
-
-            <li>
-              <a className={styles['message-item-link']} href="">
-                <div className={styles['message-item-hd']}>
-                  <div className={styles['message-item-date']}>06-06</div>
-                  <h3 className={styles['message-item-tit']}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h3>
-                </div>
-              </a>
-            </li>
-
-            <li>
-              <a className={styles['message-item-link']} href="">
-                <div className={styles['message-item-hd']}>
-                  <div className={styles['message-item-date']}>06-06</div>
-                  <h3 className={styles['message-item-tit']}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h3>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <Loading />
+      <h3 className={styles.message_title}>最新消息</h3>
+      
+      <div className={styles.message_content}>
+        <div className={styles.news_item}>
+          <h4 className={styles.news_title}>08/20 我們致電影的情書 戀愛・電影館 9 月在浪漫的光影中出發</h4>
+          <div className={styles.news_brief}>
+            <p>
+              戀愛・電影館與觀眾闊別兩個月後，光影大門即將於九月重開，讓我們在銀幕下再次 相聚。
+              <Link className={styles.news_link} to="/news/2020-08-20">[了解詳情]</Link>
+            </p>
+          </div>
         </div>
       </div>
+
+      
+
     </section>
   );
 }

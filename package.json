@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "PORT=8080 umi dev",
+    "start": "PORT=8001 umi dev",
     "build": "umi build",
     "test": "umi test",
     "lint": "eslint {src,mock,tests}/**/*.{js,jsx} --fix",
@@ -19,12 +19,15 @@
     "@atlaskit/theme": "^10.0.2",
     "graphql": "^15.3.0",
     "lodash.debounce": "^4.0.8",
+    "moment": "^2.27.0",
     "p-timeout": "^3.2.0",
     "react": "^16.8.6",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.8.6",
     "react-google-maps": "^9.4.5",
     "react-id-swiper": "^4.0.0",
+    "react-spring": "^8.0.27",
+    "resize-observer-polyfill": "^1.5.1",
     "swiper": "^6.1.1"
   },
   "devDependencies": {

@@ -1,0 +1,261 @@
+.programme {
+  background-size: cover;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, rgba(248, 180, 179, 1), rgba(255, 241, 194, 1));
+
+  .no_dates {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .film_detail {
+    .detail_plot {
+      display: flex;
+      padding: 30px;
+    }
+
+    .detail_title {
+      font-size: 18px;
+      width: 36px;
+      margin-right: 10px;
+    }
+
+    .detail_desc {
+      color: #202020;
+      font-size: 14px;
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+  }
+
+  .hot {
+    display: flex;
+    width: 150%;
+    margin-left: -25%;
+    padding: 40px 0;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+
+    .hot_title {
+      font-size: 20px;
+      width: 40px;
+    }
+
+    .background {
+      position: absolute;
+      background-size: cover;
+      background-position: center center;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      filter: blur(50px);
+    }
+
+    .hot_content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pagination {
+      height: 10px;
+    }
+
+    .film_meta {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+
+      .meta_title {
+        font-size: 16px;
+      }
+
+      .meta_data {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+    }
+
+    .swiper_film {
+      display: flex;
+
+      .inner {
+        margin: 40px 15px;
+        box-sizing: border-box;
+        flex: 1;
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: 200% 200%;
+        filter: blur(40px);
+        opacity: .55;
+      }
+
+      .foreground {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .poster {
+        font-size: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.35);
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .content {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 0;
+
+        .actions {
+          display: flex;
+
+          .button {
+            background: hsla(0,0%,100%,.35);
+            box-shadow: 0 0.02rem 0.08rem 0 rgba(0,0,0,.1);
+            border-radius: 5px;
+            font-size: 14px;
+            width: 47.61904762%;
+            height: 30px;
+            color: #fff;
+            border: none;
+            padding: 0;
+
+            &:active {
+              background: hsla(0,0%,100%,.1);
+            }
+          }
+        }
+
+        .files {
+          flex: 1;
+          width: 100%;
+
+          .title {
+            font-size: 18px;
+            color: #fff;
+          }
+
+          .info {
+            font-size: 12px;
+            color: #fff;
+            opacity: .8;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }  
+
+  .shows {
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+
+    .shows_header {
+      display: flex;
+      border-bottom: 1px solid #eee;
+    }
+
+    .show_item {
+      padding: 10px;
+      height: 45px;
+      line-height: 25px;
+      box-sizing: border-box;
+      display: flex;
+    }
+
+    .time_item {
+      border-bottom: 1px solid #eee;
+      padding: 10px;
+
+      display: flex;
+
+      .begin_time {
+        font-size: 18px;
+        display: block;
+      }
+
+      .end_time {
+        font-size: 14px;
+        color: #202020;
+        opacity: .6;
+      }
+
+      .price {
+        flex: 1;
+        display: flex;
+        text-align: right;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 18px;
+        color: #ff5454;
+
+        span {
+          font-size: 11px;
+          margin-right: 5px;
+        }
+      }
+
+      .actions {
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+
+        .button {
+          background: hsl(0 100% 50% / 0.95);
+          box-shadow: 0 0.02rem 0.08rem 0 rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          font-size: 14px;
+          height: 30px;
+          width: 70px;
+          color: #ffffff;
+          border: none;
+          padding: 0;
+          outline: none;
+
+          &:active {
+            opacity: .8;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .programme {
+    .hot {
+      .swiper_film {
+  
+        .poster {
+          width: 220px;
+        }
+      }
+    }
+  }
+}

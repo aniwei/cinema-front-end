@@ -32,52 +32,6 @@ export default {
       ],
     },
     {
-      path: '/programme',
-      component: '../layouts/BasicLayout',
-      routes: [
-        {
-          path: '/programme',
-          routes: [
-            {
-              path: '/programme',
-              name: 'programme',
-              component: './Programme'
-            }, 
-            {
-              path: '/programme',
-              routes: [
-                {
-                  path: '/programme/:programmeId',
-                  name: 'programme',
-                  component: './Programme/Detail'
-                }
-              ]
-            },
-          ]
-        },
-      ],
-    }, {
-      path: '/about',
-      component: '../layouts/BasicLayout',
-      routes: [
-        {
-          path: '/about',
-          component: './About'
-        }
-      ],
-    }, {
-      path: '/news',
-      component: '../layouts/BasicLayout',
-      routes: [
-        {
-          path: '/news',
-          component: './News'
-        }, {
-          path: '/news/:newId',
-          component: './News/Detail'
-        }
-      ],
-    }, {
       path: '/',
       component: '../layouts/BasicLayout',
       routes: [
@@ -88,6 +42,43 @@ export default {
               path: '/',
               name: 'home',
               component: './Home'
+            }, 
+            {
+              path: '/about',
+              name: 'about',
+              component: './About'
+            },
+            {
+              path: '/news',
+              name: 'news',
+              component: './News',
+            },
+            {
+              path: '/news/:id',
+              name: 'newsDetail',
+              component: './News/Detail',
+            },
+            {
+              path: '/trading',
+              name: 'trading',
+              component: './Trading'
+            },
+            {
+              path: '/programme',
+              name: 'programme',
+              component: './Programme'
+            },
+            {
+              path: '/topic',
+              name: 'topic',
+              component: './Topic',
+              routes: [
+                // {
+                //   path: '/topic/:id',
+                //   name: 'topic',
+                //   component: './Popic/Detail'
+                // }
+              ]
             }
           ]
         },
@@ -118,8 +109,9 @@ export default {
         },
         locale: {
           enable: true,
-          default: 'zh-CN',
-          baseNavigator: true
+          default: 'zh_MO',
+          baseNavigator: true,
+          baseSeparator: '_'
         }
       },
     ],
@@ -135,7 +127,4 @@ export default {
     'configs': resolve(__dirname, 'src/configurations'),
   },
   theme: './src/themes/index.js',
-  cssLoaderOptions: {
-    localIdentName: '[local]'
-  }
 };

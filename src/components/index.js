@@ -1,4 +1,3 @@
-export { default as GlobalHeader } from './GlobalHeader';
-export { default as GlobalFooter } from './GlobalFooter';
-export { default as GlobalPagingTitle } from './GlobalPagingTitle';
-export { default as GlobalContact } from './GlobalContact';
+export { default as HeaderLayout } from './HeaderLayout';
+export { default as FooterLayout } from './FooterLayout';
+

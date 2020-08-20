@@ -1,28 +1,36 @@
-import styles from './index.less';
+import { useState, useCallback, useMemo } from 'react';
+import Swiper from 'react-id-swiper';
+import classnames from 'classnames';
+import styles from './index.less';  
 
-export default function NewsDetail () {
+
+export default function () {
+
   return (
-    <div className={styles.news}>
-      <article className={styles.article}>
-        
-        <h2 className={styles.title}>‘FASHION IS AN ATTITUDE’ - 时装电影专题展 六月型格降臨戀愛‧電影館</h2>
-        <div className={styles.header}>
-          <span className={styles.date}>发布于 2018/01/20</span>
-        </div>
-        <div className={styles.content}>
-          <p>文化局戀愛‧電影館將於6月14日至30日，推出“‘FASHION IS AN ATTITUDE’―時裝電影專題展”，影展分別以三個環節“設計師！設計師！”、“時裝背後”及“城市與她的時裝”來探究時尚的概念和時裝與電影的關係。另外，将联同本澳多个时尚品牌、设计师、化妆师、发型师、模特儿及摄影团队合作，以多款型格亮丽造型向选映电影及时尚设计师致敬。透过别树一格的创意合作，展示本澳专材的丰厚潜能。</p>
+    <div className={styles.news_detail}>
+      <div className={styles.detail}>
+        <h1 className={styles.detail_title}>
+          我們致電影的情書<br />
+          戀愛・電影館 9 月在浪漫的光影中出發
+        </h1>
 
-          <p>選映的影片，包括由永恆的“時尚Icon”柯德莉‧夏萍主演的《甜姐兒》，展出由時裝大師Hubert de Givenchy度身打造的服裝；日本鬼才導演北野武的斑斕唯美之作《玩偶》，成為擔任山本耀司最完美的表演舞台；《時裝巨人的狂情歲月》回到才年僅21歲、剛被Dior任命為首席設計師的Yves Saint Laurent的年輕時代；在《第五元素》裡，時裝界頑童Jean Paul Gaultier一展既前衛破格又復古的經典造型。另外三部由不同角度出發的紀錄片將帶領觀眾漫遊時尚背後的世界，包括Gaultier 一場跨越時裝、電影、劇場與舞蹈的《Jean Paul Gaultier：奇幻花生騷 》；捕捉常出沒在紐約街頭的有型婆婆們品味獨特混搭時尚的《時尚美魔女》；以及導演Reiner Holzemer將鏡頭緊隨著一向神秘、被譽為當代最具開創性的設計師Martin Margiela的《Martin Margiela：自話自傳》。</p>
-
-          <p>在“城市与她的时装环节”中，探索巴黎、米兰、纽约、洛杉矶 ─ 与时尚息息相关的重镇，游玩于“巴黎时装周”的《雲裳風暴》；由导演Luca Guadagnino执导，与Fendi及Valentino等国际品牌合作，讲述一个靠纺织业起家的大家族挣扎于保持传统与迎接改变，拍摄于米兰的《私情．狂》；美国导演Woody Allen早期作品《安妮荷尔》，展现一位位在曼哈顿街头出没的 “New Yorker” ；丹麦名导Nicolas Winding Refn在剧情脑洞大开的《霓裳恶魔》中，透过霓虹灯、电音和美色将视听风格推到极至，誓要让观众感官全开。</p>
-
-          <p>門票於6月11日（星期四）上午10時起在戀愛．電影館及電影館網站（www.cinematheque-passion.mo）發售。票价为澳门币60元正，全日制学生及65岁以上的长者半价。而一次购买10张或以上正价门票，更可享八折优惠。售票处开放时间为每天上午10时至晚上11时30分（逢星期一休馆）。</p>
-
-          <p>有关放映安排依偱卫生部门防疫指引进行，并以保障居民健康为首要考虑，主办单位将因应疫情调整活动安排，加强场馆清洁及消毒。入场观众请戴好口罩、接受体温探测、出示澳门健康码及配合人流控制措施。查询节目详情，请致电2852 2585。</p>
+        <div className={styles.detail_desc}>
+          发布于 2020-08-20
         </div>
 
-        
-      </article>
+        <div className={styles.detail_content}>
+          <p>戀愛・電影館與觀眾闊別兩個月後，光影大門即將於九月重開，讓我們在銀幕下再次 相聚。</p>
+          <p>2020 疫情影響着每一個人日常生活，讓我們更明白到世態無常，一切在變。唯一不變 的，可能是我們仍對生活有盼望，對夢想有執着。 或許對影迷來說，是他對電影不變 的熱愛。故戀愛‧電影館恢復對外開放的第一個主題，是選擇向電影致敬，展題名 為:《致電影的情書:大銀幕裡拍電影》。</p>
+          <p>在這個主題展中，我們選映了十部橫跨不同年代來自不同國家或地區的作品。這些作 品的主題都跟電影有關，它們或是影史上的經典，或是自成一格的傑作。無論在形式 或內容上，總能勾起觀眾對電影無以名狀的愛――費里尼《八部半》中導演在現實與 夢幻中的妙想;活地・阿倫《戲假情真》的女主角躍進銀幕去尋找真愛;《星光伴我 心》與電影結伴成長的回憶與鄉愁 ;《萬花嬉春》真・基利在雨中倚着燈柱踢躂喜 舞.... 一個一個的經典場面，不同形式的敘事風格，讓觀眾伴隨每個導演的思緒，進入 一個又一個電影中的電影世界。</p>
+          <p>9 月 12-23 日《致電影的情書:大銀幕裡拍電影》主題影展片單: 開幕電影:《萬花嬉春》數碼修復版 Singin' in the Rain (Remastered) (1952)</p>
+          <p>1. 《紅樓金粉》數碼修復版 Sunset Boulevard (Remastered) (1950) 2. 《八部半》數碼修復版 Otto e Mezzo (Remastered) (1963)</p>
+          <p>3. 《戲假情真》The Purple Rose of Cairo (1985)</p>
+          <p>4. 《星光伴我心》數碼修復版 Cinema Paradiso (Remastered) (1990) 5. 《大寫特寫》Close-up (1990)</p>
+          <p>6. 《阮玲玉》數碼修復版 Center Stage (Remastered) (1992)</p>
+          <p>7. 《不散》數碼修復版 Goodbye, Dragon Inn (Remastered) (2003) 8. 《當光影不在》Phantom of Illumination (2017)</p>
+          <p>9. 《王牌辯士》Talking the Pictures (2019)</p>
+        </div>
+      </div>
     </div>
   );
 }

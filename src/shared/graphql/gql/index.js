@@ -1,7 +1,5 @@
-import * as UserGQL from './user';
-import * as GlobalGQL from './global';
+import * as MovieGQL from './movie';
 
 export default {
-  ...UserGQL,
-  ...GlobalGQL
+  ...MovieGQL
 };

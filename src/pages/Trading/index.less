@@ -1,0 +1,177 @@
+.programme {
+  background-size: cover;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, rgba(248, 180, 179, 1), rgba(255, 241, 194, 1));
+
+
+  .hot {
+    display: flex;
+
+    .hot_title {
+      font-size: 20px;
+      width: 40px;
+    }
+
+    .hot_content {
+      flex: 1;
+    }
+
+    .pagination {
+      height: 10px;
+    }
+
+
+    .swiper_film {
+      display: flex;
+
+      .inner {
+        padding: 40px 15px;
+        box-sizing: border-box;
+        flex: 1;
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: 200% 200%;
+        filter: blur(40px);
+        opacity: .55;
+      }
+
+      .foreground {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+        display: flex;
+      }
+
+      .poster {
+        width: 70px;
+        font-size: 0;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .content {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 0;
+
+        .actions {
+          display: flex;
+
+          .button {
+            background: hsla(0,0%,100%,.35);
+            box-shadow: 0 0.02rem 0.08rem 0 rgba(0,0,0,.1);
+            border-radius: 5px;
+            font-size: 14px;
+            width: 47.61904762%;
+            height: 30px;
+            color: #fff;
+            border: none;
+            padding: 0;
+
+            &:active {
+              background: hsla(0,0%,100%,.1);
+            }
+          }
+        }
+
+        .files {
+          flex: 1;
+          width: 100%;
+
+          .title {
+            font-size: 18px;
+            color: #fff;
+          }
+
+          .info {
+            font-size: 12px;
+            color: #fff;
+            opacity: .8;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }  
+
+  .shows {
+    background-color: #fff;
+
+    .shows_header {
+      display: flex;
+      border-bottom: 1px solid #eee;
+    }
+
+    .show_item {
+      padding: 10px;
+      height: 45px;
+      line-height: 25px;
+      box-sizing: border-box;
+      display: flex;
+    }
+
+    .time_item {
+      border-bottom: 1px solid #eee;
+      padding: 10px;
+
+      display: flex;
+
+      .begin_time {
+        font-size: 18px;
+        display: block;
+      }
+
+      .end_time {
+        font-size: 14px;
+        color: #202020;
+        opacity: .6;
+      }
+
+      .price {
+        flex: 1;
+        display: flex;
+        text-align: right;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 18px;
+
+        span {
+          font-size: 11px;
+          margin-right: 5px;
+        }
+      }
+
+      .actions {
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+
+        .button {
+          background: hsla(0,0%,100%,.35);
+          box-shadow: 0 0.02rem 0.08rem 0 rgba(0,0,0,.1);
+          border-radius: 5px;
+          font-size: 14px;
+          height: 30px;
+          width: 70px;
+          color: #202020;
+          border: none;
+          padding: 0;
+          outline: none;
+        }
+      }
+    }
+  }
+}
