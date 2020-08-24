@@ -1,13 +1,15 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { formatMessage, setLocale, getLocale, FormattedMessage } from 'umi-plugin-locale';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import { formatMessage, getLocale } from 'umi-plugin-locale';
 import { connect } from 'dva';
 import moment from 'moment';
 import Swiper from 'react-id-swiper';
 import classnames from 'classnames';
+import ImageGallery from 'react-image-gallery';
 
 import Purchase from '../../components/Purchase';
 
 import styles from './index.less';  
+
 
 function Movie (props) {
   const { className, poster } = props;
@@ -21,28 +23,59 @@ function Movie (props) {
   )
 }
 
-function MovieMeta ({ title, director, year, length, rating, region }) {
+function MovieMeta ({ rating, director, title, color, subtitles, format, language, year, length, region }) {
   const locale = getLocale();
 
   return (
     <div className={styles.film_meta}>
       <h2 className={styles.meta_title}>{title[locale]}</h2>
       <div className={styles.meta_data}>
-        {year} / {region[locale]}
+        <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>Group: {rating}</span>
       </div>
     </div>
   )
 }
 
-function MovieDetail ({ plot }) {
+function MovieDetail ({ plot, trailer, stills }) {
   const locale = getLocale();
+
+  const swiperOptions = {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    spaceBetween: 30,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  }
 
   return (
     <div className={styles.film_detail}>
       <div className={styles.detail_plot}>
-        <h4 className={styles.detail_title}>故事大綱</h4>
+        <h4 className={styles.detail_title}>{formatMessage({ id: 'programme.synopsis.title' })}</h4>
         <p className={styles.detail_desc}>{plot[locale]}</p>
         
+      </div>
+
+      {
+        trailer && <div className={styles.detail_trailer}>
+          <iframe className={styles.iframe} src={trailer} />
+        </div>
+      }
+
+
+      <div className={styles.detail_stills}>
+        <div className={styles.detail_stills_content}>
+          <ImageGallery 
+            showNav={false}
+            items={stills.map(still => {
+              return {
+                original: still,
+                thumbnail: still + '?x-oss-process=image/resize,h_100'
+              }
+            })}
+          />
+        </div>
       </div>
     </div>
   )
@@ -50,23 +83,46 @@ function MovieDetail ({ plot }) {
 
 function Movies (props) {
   const { onChange, movies, movie } = props;
-  const swiperOptions = useMemo(() => ({
+
+  const swiperOptions = {
+    initialSlide: movie.index,
     slidesPerView: 3,
     centeredSlides: true,
     on: {
       slideChange: onChange
     },
-    pagination: {
-      el: `.${styles.pagination}`,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     }
-  }), [onChange]);
+  }
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current !== null && ref.current.swiper !== null) {
+      ref.current.swiper.slideTo(movie.index);
+    }
+  }, [movie, movie.index]);
+
+  const onNavigationClick = (type) => {
+    if (ref.current !== null && ref.current.swiper !== null) {
+      const swiper = ref.current.swiper;
+
+      if (type === 'prev') {
+        swiper.slidePrev();
+      } else {
+        swiper.slideNext();
+      }
+    }
+  }
 
   return (
     <div className={styles.hot}>
       <div className={styles.background} style={{ backgroundImage: `url(${movie.poster})` }} />
       <div className={styles.hot_content}>
         
-        <Swiper {...swiperOptions}>
+        <Swiper {...swiperOptions} ref={ref}>
           {
             movies.map(movie => {
               return (
@@ -82,6 +138,8 @@ function Movies (props) {
             })
           }
         </Swiper>
+        <div className="swiper-button-prev" onClick={(e) => onNavigationClick('prev', e)}></div>
+        <div className="swiper-button-next" onClick={(e) => onNavigationClick('next', e)}></div>
       </div>
       {movie && <MovieMeta {...movie} />}
     </div>
@@ -89,7 +147,7 @@ function Movies (props) {
 }
 
 function TimeItem (props) {
-  const { beginTime, endTime, price, tickets } = props;
+  const { beginTime, endTime, price, tickets, onClick } = props;
 
   return (
     <div className={styles.time_item}>
@@ -98,36 +156,64 @@ function TimeItem (props) {
         <span className={styles.end_time}>{endTime}</span>
       </div>
 
-      <div className={styles.price}>
+      {/* <div className={styles.price}>
         <span>$</span>{price}
       </div>
       <div className={styles.actions}>
-        <button className={styles.button}>购买</button>
-      </div>
+        <button className={styles.button} onClick={onClick}>购买</button>
+      </div> */}
     </div>
   )
 }
 
 function DatesSelect (props) {
   const { dates, movie } = props;
-  const first = dates.entries().next();
-  const [date, setDate] = useState(first.value[1]);
-  const [visible, setVisible] = useState(false);
+  const [selectedShow, setSelectedShow] = useState(null);
 
-  const datesSelections = [];
+  const onButtonClick = (show, event) => {
+    setSelectedShow(show);
+  }
+
+  const onShowItemClick = (value) => {
+    setDate(value);
+  }
+
+  let newDates = [];
 
   dates.forEach((show, key) => {
-    const date = new Date(key);
+    newDates.push({
+      key,
+      show
+    });
+  });  
+
+  newDates = newDates.sort((a, b) => {
+    return a.key > b.key ? 1 : -1
+  });
+
+  console.log(newDates)
+
+  useEffect(() => {
+    const first = newDates[0];
+    setDate([first.key, first.show]);
+  }, [dates, newDates]);
+
+  const first = newDates[0];
+  const [date, setDate] = useState([first.key, first.show]);
+
+  const datesSelections = newDates.map(({ key, show }) => {
+    const time = new Date(key);
+
     const classes = classnames({
-      active: date.key === key
+      [styles.show_item_active]: date[0] === key
     }, styles.show_item)
 
-    datesSelections.push(
-      <div className={classes} key={show.objectId}>
-        {moment(date).format(`MM月DD日`)}
+    return (
+      <div className={classes} key={show.objectId} onClick={() => onShowItemClick([key, show])}>
+        {moment(time).format(`MM-DD`)}
       </div>
     )
-  });  
+  })
 
   return (
     <div className={styles.shows}>
@@ -137,35 +223,38 @@ function DatesSelect (props) {
 
       <div className={styles.shows_content}>
 
-        <TimeItem 
-          beginTime="14:40"
-          endTime="16:40"
-          price="60.00"
-          tickets={60}
-        />
-
-        <TimeItem 
-          beginTime="14:40"
-          endTime="16:40"
-          price="60.00"
-          tickets={60}
-        />
+        {
+          date[1].sort((a, b) => {
+            return a.timestamp > b.timestamp ? 1 : -1;
+          }).map(date => {
+            return (
+              <TimeItem 
+                objectId={date.objectId}
+                key={date.timestamp}
+                beginTime={moment(new Date(date.timestamp * 1000)).format(`HH:mm`)}
+                endTime={moment(new Date((date.timestamp + 60 * movie.length) * 1000)).format(`HH:mm`)}
+                price="60.00"
+                tickets={60}
+                onClick={(e) => onButtonClick(date, e)}
+              />
+            );
+          })
+        }
         
       </div>
 
-      {
-        movie && <Purchase 
-          visible={visible} 
-          movie={movie}
-        />
-      }
+      {/* <Purchase 
+        movie={movie} 
+        show={selectedShow} 
+        visible={!!selectedShow} 
+      /> */}
     </div>
   );
 }
 
 function NoDates () {
   return (
-    <div className={styles.no_dates}>暫無排片</div>
+    <div className={styles.no_dates}>{formatMessage({ id: 'programme.shows.empty' })}</div>
   )
 }
 
@@ -186,39 +275,41 @@ function Shows (props) {
 
       getMovieShows();
     }
-  }, [movie, props]);
+  }, [movie, movie.shows, props]);
 
-  const dates = useMemo(() => {
-    const movieShows = movie.shows || [];
-    const dates = new Map();
+  const movieShows = movie.shows || [];
+  const dates = new Map();
 
-    movieShows.forEach(show => {
-      let date = dates.get(show.date);
+  movieShows.forEach(show => {
+    let date = dates.get(show.date);
 
-      if (!date) {
-        date = [];
-        dates.set(show.date, date);
-      }
+    if (!date) {
+      date = [];
+      dates.set(show.date, date);
+    }
 
+    if (show.status !== 'REMOVE') {
       date.push(show);
-    });
-
-    return dates;
-  }, [movie.shows]);
+    }
+  });
 
   return (
     dates.size > 0 ?
-      <DatesSelect dates={dates} /> :
-      <NoDates />
+      <DatesSelect movie={movie} dates={dates} /> :
+      null
   )
 }
 
 function Programme (props) {
   const { movies } = props;
+  
   const [movie, setMovie] = useState(movies[0]);
-
+  
   useEffect(() => {
-    const { dispatch } = props;
+    const { dispatch, location } = props;
+    const query = location.query;
+    let selected = movies[0];
+
     const getMovies = async () => {
       await dispatch({
         type: 'movie/movies',
@@ -228,19 +319,29 @@ function Programme (props) {
       })
     }
 
+    if (query.objectId) {
+      movies.some(movie => {
+        if (movie.objectId === query.objectId) {
+          selected = movie;
+          return true;
+        }
+      })
+    }
+
+    setMovie(selected);
+
+
     if (movies.length === 0) {
       getMovies();
     }
-  }, [movies.length, props]);
+  }, [movies, movies.length, props]);
 
   useEffect(() => {
-    if (movies.length > 0) {
-      setMovie(movies[0]);
-    }
-  }, [movies]);
+    window.scrollTo(0, 0);
+  }, []);
 
-  const onChange = useCallback((swiper) => {
-    setMovie(movies[swiper.activeIndex]);
+  const onChange = useCallback(function () {
+    setMovie(movies[this.activeIndex]);
   }, [movies]);
 
   return (

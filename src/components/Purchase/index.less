@@ -1,5 +1,6 @@
 .purchase {
-
+  position: fixed;
+  z-index: 1000;
   .purchase_mask {
     position: fixed;
     top: 0;
@@ -9,12 +10,95 @@
     background: rgba(0, 0, 0, .5);
   }
 
-  .purchase_content {
+  .purchase_context {
+    display: flex;
     position: fixed;
-    max-width: 400px;
+    width: 600px;
     left: 50%;
     top: 50%;
 
     transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+  }
+
+  .code_input,
+  .email_input {
+    border: none;
+    margin-top: 10px;
+    outline: none;
+    padding: 10px;
+    background-color: #eee;
+    width: 100%;
+  }
+
+  .button {
+    padding: 5px 30px;
+    border-radius: 4px;
+    background: red;
+    color: #fff;
+    margin-top: 40px;
+  }
+
+  .code_input {
+
+  }
+
+  .purchase_payment {
+    flex: 1;
+
+    .payment_image {
+      width: 120px;
+    }
+  }
+
+  .purchase_movie {
+    display: flex;
+    flex: 1;
+
+    .movie_poster {
+      width: 120px;
+      margin-right: 10px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .movie_data {
+
+    }
+
+    .movie_desc {
+      color: #202020;
+      opacity: .8;
+      margin-top: 10px;
+    }
+
+    .movie_tilte {
+      font-size: 20px;
+      color: #202020;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .purchase {
+    z-index: 1000;
+    
+
+    .purchase_mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, .5);
+    }
+  
+    .purchase_context {
+      flex-direction: column;
+      width: 80%;
+    }
   }
 }

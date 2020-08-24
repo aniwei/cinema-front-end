@@ -1,30 +1,20 @@
-import component from './en_US/component';
 import menu from './en_US/menu';
-import user from './en_US/user';
 import home from './en_US/home';
+import about from './en_US/about';
+import programme from './en_US/programme';
+import news from './en_US/news';
 
 export default {
-  "common.confirm": "Confirm",
-  "common.search": "Search",
-  "common.signIn": "Sign In",
-  "common.signUp": "Sign Up",
-  "common.settings": "Settings",
-  "common.logout": "Logout",
-  "common.send": "Send",
-  "common.optional": "自选",
-  "common.follow": "Follow",
-  "common.follower": "Follower",
-  "common.share": "Share",
-  "common.code": "Code",
-  "common.back": "Back",
-  "common.publish": "Publish",
-  "common.notifications": "Notifications",
-  "common.edit": "Edit",
-  "common.cancel": "Cancel",
-  "common.save": "Save",
-  "common.seeMore": "查看更多",
-  ...component,
-  ...menu,
-  ...user,
+  'common.rating': 'Group: ',
+  'common.movie.color': 'Color',
+  'common.movie.blackwhite': 'Black and White',
+  'footer.about.title': 'About Us',
+  'footer.about.desc': 'Adjacent to the renowned Macao’s world heritage listed icon Ruins of St. Paul’s, the Cinematheque‧Passion, located at Travessa da Paixão No. 9-13, is a three-storey multifunctional building assembled including film screening, exhibition hall and film information room, local video storage, as well as film journals and book reading services.',
+  'footer.about.address': 'Travessa da Paixão No. 9-13',
+  'footer.about.address.title': 'Venue',
   ...home,
+  ...menu,
+  ...about,
+  ...programme,
+  ...news
 };

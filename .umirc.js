@@ -18,6 +18,21 @@ export default {
               component: './Admin'
             }, 
             {
+              path: '/admin/movie',
+              name: 'movie',
+              component: './Admin/Movie',
+            }, 
+            {
+              path: '/admin/ticket/Sell',
+              name: 'movie',
+              component: './Admin/Ticket/Sell',
+            }, 
+            {
+              path: '/admin/movie/:movieId',
+              name: 'movie',
+              component: './Admin/Movie/Detail'
+            },
+            {
               path: '/admin/user',
               routes: [
                 {
@@ -44,6 +59,11 @@ export default {
               component: './Home'
             }, 
             {
+              path: '/payment',
+              name: 'payment',
+              component: './Payment'
+            },
+            {
               path: '/about',
               name: 'about',
               component: './About'
@@ -67,6 +87,11 @@ export default {
               path: '/programme',
               name: 'programme',
               component: './Programme'
+            },
+            {
+              path: '/poster/:id',
+              name: 'poster',
+              component: './Poster',
             },
             {
               path: '/topic',
@@ -96,7 +121,7 @@ export default {
         antd: false,
         dva: true,
         dynamicImport: false,
-        title: 'weim-front-end',
+        title: '戀愛・電影館 Cinematheque・Passion',
         dll: false,
         routes: {
           exclude: [
@@ -110,6 +135,7 @@ export default {
         locale: {
           enable: true,
           default: 'zh_MO',
+          // default: 'en_US',
           baseNavigator: true,
           baseSeparator: '_'
         }

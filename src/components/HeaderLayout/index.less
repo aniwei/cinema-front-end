@@ -10,6 +10,10 @@
     width: 100%;
     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.35);
 
+    .langs_primary {
+      display: none;
+    }
+
     .nav_bar {
       display: flex;
       align-items: center;
@@ -101,9 +105,18 @@
   }
 }
 
+
+
+
 @media screen and (min-width: 600px) {
   .header {
     .nav {
+    
+
+      .langs_primary {
+        display: flex;
+        margin-left: 50px;
+      }
       
       .logo {
         flex: auto;

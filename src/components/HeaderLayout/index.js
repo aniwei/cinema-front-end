@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import Language from '../Language';
+
 
 
 
@@ -8,7 +10,6 @@ import styles from './index.less';
 
 
 import logo from '../../assets/common/logo.png';
-import 'swiper/swiper.less';
 
 function MenuIconLine () {
   return (
@@ -43,14 +44,16 @@ function NavBar (props) {
   const onMenuItemClick = useCallback(() => {
     setExpanded(false);
   }, []);
+  
 
   return (
     <nav className={styles.nav}>
+      
       <div className={styles.nav_bar}>
         <Logo />
 
         <Menus expanded className={styles.nav_menus_primary} onMenuItemClick={() => {}} />
-
+        <Language className={styles.langs_primary} />
         <MenuButton onClick={onMenuButtonClick} />
       </div>
 
@@ -59,6 +62,8 @@ function NavBar (props) {
           expanded={expanded} 
           onMenuItemClick={onMenuItemClick}
         />
+
+        {expanded && <Language />}
       </div>
     </nav>
   )

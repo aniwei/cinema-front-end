@@ -1,5 +1,7 @@
 export default {
-  "menus.home": "Home",
-  "menus.userPanel": "User Panel",
-  "menus.aboutUs": "About Us"
+  "menus.home": "Cinematheque・Passion",
+  "menus.programme": "Programme",
+  "menus.topic": "Topic",
+  "menus.news": "Latest News",
+  "menus.about": "About Us",
 };

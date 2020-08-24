@@ -1,9 +1,6 @@
 import { history } from 'umi';
 import { movies, shows } from 'services/movie';
 
-import moviesJson from './movies.json';
-
-
 export default {
   namespace: 'movie',
 
@@ -19,7 +16,10 @@ export default {
       yield put({
         type: 'updateState',
         payload: {
-          movies: response
+          movies: response.map((movie, index) => {
+            movie.index = index;
+            return movie;
+          })
         }
       });
     },
@@ -33,10 +33,22 @@ export default {
       const { movie } = payload;
       movie.shows = response;
 
+      movies.some((m, index) => {
+        if (m.objectId === movie.objectId) {
+          movies[index] = {
+            ...movie
+          }
+          return true;
+        }
+      })
+
       yield put({
         type: 'updateState',
         payload: {
-          movies
+          movies: [...movies].map((movie, index) => {
+            movie.index = index;
+            return movie;
+          })
         }
       });
     },

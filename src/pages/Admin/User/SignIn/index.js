@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { connect } from 'dva';
 import Button, { ButtonGroup } from '@atlaskit/button';
-import { Checkbox } from '@atlaskit/checkbox';
 import TextField from '@atlaskit/textfield';
-import ModalDialog, { ModalFooter, ModalTransition } from '@atlaskit/modal-dialog';
+import { Redirect } from 'dva/router';
 
 import Form, {
   CheckboxField,
@@ -21,7 +20,7 @@ const Username = (props) => {
   return <Field
     isRequired
     name="username"
-    label="User name"
+    label="用户名"
     defaultValue=""
   >
     {({ fieldProps, error }) => (
@@ -46,7 +45,7 @@ const Password = () => {
   return (
     <Field
       name="password"
-      label="Password"
+      label="密码"
       defaultValue=""
       isRequired
       validate={value =>
@@ -81,36 +80,44 @@ const Password = () => {
 
 
 
-export default function SignIn () {
-  const [opened, openModal] = useState(false);
-
-  const onSubmit = (data) => {
-    console.log('form data', data);
-
-    return new Promise(resolve => {
-      openModal(true);
+export default connect(({ user }) => {
+  return {
+    ...user
+  }
+})(function SignIn (props) {
+  const onSubmit = async (data) => {
+    const { dispatch, history } = props;
+    
+    await dispatch({
+      type: 'AdminUser/signIn',
+      payload: {
+        input: data
+      }
     });
+
+    history.replace('/admin/ticket/sell');
+  }
+
+  const { user } = props;
+
+  if (user) {
+    return <Redirect to="/admin" />
   }
 
   return <div className={styles.signin}>
     <h1 className={styles.title}>
-      Sign In
+      登陆
     </h1>
     <Form onSubmit={onSubmit}>
       {({ formProps, submitting }) => (
         <form {...formProps}>
           <Username />
           <Password />
-          <CheckboxField name="remember" label="Remember me" defaultIsChecked>
-            {({ fieldProps }) => (
-              <Checkbox {...fieldProps} label="Always sign in on this device" />
-            )}
-          </CheckboxField>
           <FormFooter>
             <ButtonGroup>
               <Button appearance="subtle">Cancel</Button>
               <Button type="submit" appearance="primary" isLoading={submitting}>
-                Sign In
+                登陆
               </Button>
             </ButtonGroup>
           </FormFooter>
@@ -118,22 +125,19 @@ export default function SignIn () {
       )}
     </Form>
     
-    {
+    {/* {
       opened ? <ModalDialog 
-        heading="Google Authenticator"
+        heading="谷歌动态码"
         onClose={() => openModal(false)}
       >
-        <p>Enter some text then submit the form to see the response.</p>
-        <Field label="Google Authorcation" name="google" defaultValue="" isRequired>
+        <p>请输入谷歌动态码</p>
+        <Field label="谷歌动态码" name="google" defaultValue="" isRequired>
           {({ fieldProps }) => <TextField {...fieldProps} />}
         </Field>
 
-        <ModalFooter>
-          <Button appearance="primary" type="submit">
-            Submit to Console
-          </Button>
-        </ModalFooter>
-      </ModalDialog> : null
-    }
+        <Button appearance="primary" type="submit">
+          登陆
+        </Button>
+      </ModalDialog> : null */}
   </div>
-}
+})

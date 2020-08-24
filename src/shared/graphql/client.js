@@ -6,11 +6,7 @@ import ErrorLink from './errorHandling';
 import enhancer from './enhancer';
 
 const httpLink = new HttpLink({
-  uri: serverConfig.endpoint,
-  headers: {
-    'x-parse-javascript-key': appConfig.javascriptKey,
-    'x-parse-application-id': appConfig.applicationId
-  }
+  uri: serverConfig.endpoint
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -29,7 +25,10 @@ const client = new ApolloClient({
     ErrorLink,
     authLink.concat(httpLink),
   ]),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  fetchOptions: {
+    mode: 'cors',
+  }
 });
 
 export default enhancer(client);

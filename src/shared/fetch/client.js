@@ -4,6 +4,7 @@ import serverConfig from 'configs/server';
 export default function (path, options = {}) {
   return fetch (`${serverConfig.uri}${path}`, {
     ...options,
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
       ...options.headers

@@ -1,26 +1,20 @@
 import menu from './zh_MO/menu';
 import home from './zh_MO/home';
+import about from './zh_MO/about';
+import programme from './zh_MO/programme';
+import news from './zh_MO/news';
 
 export default {
-  "common.confirm": "确认",
-  "common.search": "搜索",
-  "common.signIn": "登录",
-  "common.signUp": "注册",
-  "common.settings": "设置",
-  "common.logout": "退出登录",
-  "common.send": "发送",
-  "common.optional": "自选",
-  "common.follow": "关注",
-  "common.follower": "粉丝",
-  "common.share": "分享",
-  "common.code": "代码",
-  "common.back": "返回",
-  "common.publish": "发布",
-  "common.notifications": "通知中心",
-  "common.edit": "编辑",
-  "common.cancel": "取消",
-  "common.save": "保存",
-  "common.seeMore": "查看更多",
+  'common.rating': '評級: ',
+  'common.movie.color': '彩色',
+  'common.movie.blackwhite': '黑白',
+  'footer.about.title': '關於本館',
+  'footer.about.desc': '戀愛・電影館位於澳門戀愛巷九至十三號，毗鄰澳門的著名世遺景點「大三巴牌坊」（即「聖保祿大教堂遺址」）。電影館樓高三層，是一個集合電影欣賞、展覽空間、本土影像保存、以及電影書籍閱讀等功能的空間。',
+  'footer.about.address': '戀愛巷9號至13號',
+  'footer.about.address.title': '場地位置',
   ...menu,
   ...home,
+  ...about,
+  ...programme,
+  ...news
 };

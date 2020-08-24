@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { formatMessage, setLocale, getLocale, FormattedMessage } from 'umi-plugin-locale';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { formatMessage, getLocale } from 'umi-plugin-locale';
+import { Link } from 'umi';
 import { connect } from 'dva';
 import moment from 'moment';
 import Swiper from 'react-id-swiper';
@@ -9,7 +10,7 @@ import classnames from 'classnames';
 import styles from './index.less';  
 
 function Movie (props) {
-  const { className, poster } = props;
+  const { className, poster, objectId } = props;
 
   return (
     <div className={classnames(styles.film, className)}>
@@ -20,15 +21,16 @@ function Movie (props) {
   )
 }
 
-function MovieMeta ({ title, director, year, length, rating, region }) {
+function MovieMeta ({ rating, director, title, color, language, subtitles , year, length, format, region, objectId }) {
   const locale = getLocale();
 
   return (
     <div className={styles.film_meta}>
       <h2 className={styles.meta_title}>{title[locale]}</h2>
       <div className={styles.meta_data}>
-        {year} / {region[locale]}
+  <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
       </div>
+      <Link to={`/programme?objectId=${objectId}`} className={styles.button}>查看影片</Link>
     </div>
   )
 }
@@ -36,23 +38,39 @@ function MovieMeta ({ title, director, year, length, rating, region }) {
 function Movies (props) {
   const { onChange, movies, movie } = props;
   const swiperOptions = useMemo(() => ({
+    initialSlide: movie.index,
     slidesPerView: 3,
     centeredSlides: true,
     on: {
       slideChange: onChange
     },
-    pagination: {
-      el: `.${styles.pagination}`,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     }
-  }), [onChange]);
+  }), [movie.index, onChange]);
+
+  const ref = useRef(null);
+
+  const onNavigationClick = (type) => {
+    if (ref.current !== null && ref.current.swiper !== null) {
+      const swiper = ref.current.swiper;
+
+      if (type === 'prev') {
+        swiper.slidePrev();
+      } else {
+        swiper.slideNext();
+      }
+    }
+  }
 
   return (
     <div className={styles.hot}>
-      <h2 className={styles.programme_tilte}>即日及预售</h2>
+      {/* <h2 className={styles.programme_tilte}>{formatMessage({ id: 'home.programme.title' })}</h2> */}
       <div className={styles.background} style={{ backgroundImage: `url(${movie.poster})` }} />
       <div className={styles.hot_content}>
         
-        <Swiper {...swiperOptions}>
+        <Swiper {...swiperOptions} ref={ref}>
           {
             movies.map(movie => {
               return (
@@ -61,6 +79,7 @@ function Movies (props) {
                     <Movie 
                       className={styles.foreground}
                       poster={movie.poster}
+                      objectId={movie.objectId}
                     />
                   </div>
                 </div>
@@ -68,6 +87,9 @@ function Movies (props) {
             })
           }
         </Swiper>
+
+        <div className="swiper-button-prev" onClick={(e) => onNavigationClick('prev', e)}></div>
+        <div className="swiper-button-next" onClick={(e) => onNavigationClick('next', e)}></div>
       </div>
       {movie && <MovieMeta {...movie} />}
     </div>
@@ -100,8 +122,8 @@ function Programme (props) {
     }
   }, [movies]);
 
-  const onChange = useCallback((swiper) => {
-    setMovie(movies[swiper.activeIndex]);
+  const onChange = useCallback(function () {
+    setMovie(movies[this.activeIndex]);
   }, [movies]);
 
   return (

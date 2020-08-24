@@ -5,9 +5,11 @@ import classnames from 'classnames';
 
 import styles from './index.less';
 
+import mpayLogo from '../../assets/common/mpay.png';
+
 
 function Movie (props) {
-  const { poster, title } = props;
+  const { poster, title, region, year } = props;
   const locale = getLocale();
 
   return (
@@ -17,6 +19,7 @@ function Movie (props) {
       </div>
       <div className={styles.movie_data}>
         <h4 className={styles.movie_tilte}>{title[locale]}</h4>
+        <p className={styles.movie_desc}>{region[locale]} / {year}</p>
       </div>
     </div>
   )
@@ -39,29 +42,43 @@ function Purchase (props) {
     <div className={classes}>
       <div className={styles.purchase_mask} />
       <div className={styles.purchase_content}>
-        <Movie {...movie} />
+        <div className={styles.purchase_context}>
+          <Movie {...movie} />
 
-        <h4 className={styles.title}>請輸入電郵</h4>
-        <div className={styles.form}>
-          <div className={styles.email_item}>
-            <input 
-              className={styles.email_input} 
-              onChange={onChange} 
-              value={value}
-            />
-            <button className={styles.code_sender}>
+          <div className={styles.purchase_payment}>
+            <div className={styles.payment_mapy}>
+              <img src={mpayLogo} className={styles.payment_image} />
+            </div>
 
-            </button>
-          </div>
-          <div className={styles.code_item}>
+            <div className={styles.form}>
+              <div className={styles.email_item}>
+                <input 
+                  className={styles.email_input} 
+                  onChange={onChange}
+                  placeholder={`请输入电邮`} 
+                  value={value}
+                />
+                <button className={styles.code_sender}>
 
-          </div>
+                </button>
+              </div>
+              <div className={styles.code_item}>
+                <input 
+                  className={styles.code_input} 
+                  onChange={onChange} 
+                  placeholder={`请输入购票数量`} 
+                  value={value}
+                />
+              </div>
 
-          <div className={styles.button_item}>
-            <button></button>
-            <button>确定</button>
+              <div className={styles.button_item}>
+                <button className={styles.button}>确定</button>
+              </div>
+            </div>
+          
           </div>
         </div>
+
       </div>
     </div>
   );
@@ -82,7 +99,7 @@ export default function (props) {
 
   return (
     createPortal(
-      <Purchase />,
+      <Purchase {...props} />,
       container
     )
   )

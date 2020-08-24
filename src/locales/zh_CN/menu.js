@@ -3,5 +3,5 @@ export default {
   "menus.programme": "节目",
   "menus.special": "专题",
   "menus.news": "最新消息",
-  "menus.about": "关于本馆",
+  "menus.about": "關於本館",
 };

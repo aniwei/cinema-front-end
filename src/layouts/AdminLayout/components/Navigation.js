@@ -43,16 +43,15 @@ const Navigation = () => (
   <AtlassianNavigation
     theme={theme}
     renderProductHome={Logo}
-    renderProfile={MyProfile}
     primaryItems={
       <>
-        <PrimaryButton>Programme</PrimaryButton>
-        <PrimaryButton>Special</PrimaryButton>
-        <PrimaryButton>News</PrimaryButton>
+        <PrimaryButton>节目</PrimaryButton>
+        <PrimaryButton>专题</PrimaryButton>
+        <PrimaryButton>新闻</PrimaryButton>
       </>
     }
     label="site"
-    moreLabel="More"
+    moreLabel="更多"
   />
 );
 

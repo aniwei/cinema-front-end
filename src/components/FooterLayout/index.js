@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import styles from './index.less';
 import Socials from './Socials';
+import { formatMessage } from 'umi-plugin-react/locale';
 
 function GoogleMap () {
   return (
@@ -11,8 +12,8 @@ function GoogleMap () {
 function About () {
   return (
     <div className={styles.footer_about}>
-      <h3 className={styles.title}>关于本馆</h3>
-      <p className={styles.desc}>戀愛・電影館位於澳門戀愛巷十三號，毗鄰澳門的著名世遺景點「大三巴牌坊」（即「聖保祿大教堂遺址」）。電影館樓高三層，是一個集合電影欣賞、本土影像保存、以及電影書籍閱讀等功能的空間。</p>
+      <h3 className={styles.title}>{formatMessage({ id: 'footer.about.title' })}</h3>
+      <p className={styles.desc}>{formatMessage({ id: 'footer.about.desc' })}</p>
     </div>
   )
 }
@@ -23,8 +24,8 @@ function Contact () {
       <div className={styles.map_item}>
         <GoogleMap />
         <div className={styles.location}>
-          <h4 className={styles.location_title}>場地位置</h4>
-          <span className={styles.contact_text}>澳門戀愛巷11-13號</span>
+          <h4 className={styles.location_title}>{formatMessage({ id: 'footer.about.address.title' })}</h4>
+          <span className={styles.contact_text}>{formatMessage({ id: 'footer.about.address' })}</span>
         </div>
       </div>
 

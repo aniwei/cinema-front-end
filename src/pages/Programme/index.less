@@ -11,18 +11,43 @@
   }
 
   .film_detail {
+    
+
+    .detail_trailer,
+    .detail_stills,
     .detail_plot {
-      display: flex;
       padding: 30px;
+    }
+
+    .detail_trailer {
+      .iframe {
+        width: 100%;
+        height: 200px;
+      }
+    } 
+
+    .detail_plot {
+      background: linear-gradient(135deg, rgba(248, 180, 179, 1), rgba(255, 241, 194, 1));
+    }
+
+    .detail_stills {
+      background: #f5f4f4;
+    }
+
+    .detail_stills_content {
+      width: 100%;
+      margin: auto;
     }
 
     .detail_title {
       font-size: 18px;
-      width: 36px;
-      margin-right: 10px;
+      margin-right: 20px;
+      width: 80px;
+      margin-bottom: 10px;
     }
 
     .detail_desc {
+      flex: 1;
       color: #202020;
       font-size: 14px;
       line-height: 2;
@@ -52,7 +77,8 @@
       top: 0;
       left: 0;
       right: 0;
-      filter: blur(50px);
+      filter: blur(20px);
+      opacity: .6;
     }
 
     .hot_content {
@@ -69,7 +95,7 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      color: #fff;
+      color: #202020;
 
       .meta_title {
         font-size: 16px;
@@ -78,6 +104,8 @@
       .meta_data {
         font-size: 12px;
         opacity: 0.8;
+        width: 50%;
+        margin: auto;
       }
     }
 
@@ -187,6 +215,19 @@
       line-height: 25px;
       box-sizing: border-box;
       display: flex;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .show_item_active::after {
+      position: absolute;
+      content: "";
+      width: 50%;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      height: 2px;
+      background: #ff5454;
     }
 
     .time_item {
@@ -248,7 +289,20 @@
 }
 
 @media screen and (min-width: 600px) {
+
+  
   .programme {
+    .film_detail {
+  
+      .detail_trailer {
+        padding: 30px;
+
+        .iframe {
+          height: 500px;
+        }
+      }
+    }
+
     .hot {
       .swiper_film {
   

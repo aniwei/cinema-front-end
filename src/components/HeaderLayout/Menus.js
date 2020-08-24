@@ -1,18 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
+import { formatMessage } from 'umi-plugin-react/locale';
 import classnames from 'classnames';
 import { Link } from 'umi';
 import { animated, useSpring, a } from 'react-spring';
 
 import styles from './index.less';
 
-const menuItems = [
-  { path: '/', text: '戀愛電影館' },
-  { path: '/programme', text: '節目' },
-  // { path: '/topic', text: '專題活動' },
-  { path: '/news', text: '最新消息' },
-  { path: '/about', text: '關於本館' }
-];
 
 export function useMeasure () {
   const ref = useRef();
@@ -38,6 +32,14 @@ export function usePrevious (value) {
 }
 
 export default function Menus (props) {
+  const menuItems = [
+    { path: '/', text: formatMessage({ id: 'menus.home' }) },
+    { path: '/programme', text: formatMessage({ id: 'menus.programme' }) },
+    // { path: '/topic', text: formatMessage({ id: 'menus.topic' }) },
+    { path: '/news', text: formatMessage({ id: 'menus.news' }) },
+    { path: '/about', text: formatMessage({ id: 'menus.about' }) }
+  ];
+
   const { expanded, onMenuItemClick, className } = props;
   const previous = usePrevious(expanded);
   const [bind, { height: menuHeight }] = useMeasure();
@@ -62,7 +64,7 @@ export default function Menus (props) {
 
 
 function MenuItem (props) {
-  return <div className={styles.menu_item} {...props}>
+  return <div className={styles.menu_item} onClick={props.onClick}>
     <Link className={styles.menu_link} to={props.path}>{props.text}</Link>
   </div>
 }
