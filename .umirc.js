@@ -74,7 +74,7 @@ export default {
               component: './News',
             },
             {
-              path: '/news/:id',
+              path: '/news/:newsId',
               name: 'newsDetail',
               component: './News/Detail',
             },

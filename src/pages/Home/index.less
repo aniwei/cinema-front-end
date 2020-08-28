@@ -125,7 +125,7 @@
           padding: 7px 20px;
           display: block;
           border: 1px solid #202020;
-          width: 100px;
+          width: 120px;
           margin: 20px auto;  
           
           &:active {
@@ -231,7 +231,36 @@
   .message {
     padding: 50px 30px;
 
-    display: flex;
+    .message_context {
+      display: flex;
+    }
+
+
+    .message_button {
+      color: #202020;
+      padding: 7px 20px;
+      display: block;
+      border: 1px solid #202020;
+      width: 120px;
+      margin: 20px auto;
+      text-align: center;
+
+      &:active {
+        background: #202020;
+        color: #fff;
+      }
+    }
+
+    .message_button_link {
+      color: #202020;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #202020;
+      opacity: .8;
+    }
 
     .message_title {
       font-size: 20px;
@@ -257,6 +286,7 @@
     .news_item {
       position: relative;
       padding: 0 0 15px 0;
+      margin-bottom: 15px;
 
       &::after {
         content: "";
@@ -293,18 +323,6 @@
           overflow: hidden;
           font-size: 14px;
           line-height: 1.5;
-  
-          
-  
-          p {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            text-overflow: ellipsis;
-            word-wrap: break-word;
-            word-break: break-all;
-            overflow: hidden;
-          }
         }
       }
 

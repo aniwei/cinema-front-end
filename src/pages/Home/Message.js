@@ -1,39 +1,66 @@
+import { useEffect, useState } from 'react';
 import { formatMessage, getLocale } from 'umi-plugin-react/locale';
 import { Link } from 'umi';
+import { connect } from 'dva';
+import moment from 'moment';
 import styles from './index.less';
 
-const news = {
-  title: {
-    zh_MO: '08/20 我們致電影的情書 戀愛・電影館 9 月在浪漫的光影中出發',
-    en_US: '08/20 Our Love Letter to the Cinema Cinematheque·Passion – Starting Your September in Romantic Light and Shadows'
-  },
-  brief: {
-    zh_MO: '戀愛・電影館與觀眾闊別兩個月後，光影大門即將於九月重開，讓我們在銀幕下再次 相聚。',
-    en_US: 'After two months of hiatus, Cinematheque·Passion will reopen its gate of light and shadows in September. Let us gather in front of the big screen all over again.'
+export default connect(({ news }) => {
+  return {
+    ...news
   }
-}
-
-export default function Message (props) {
+})(function Message (props) {
+  const [isLoading, setLoading] = useState(true);
   const locale = getLocale();
+  const { news } = props;
+
+  useEffect(() => {
+    const { dispatch } = props;
+    const getNews = async () => {
+      setLoading(true);
+
+      await dispatch({
+        type: 'news/news',
+        payload: {
+          limit: 5
+        }
+      });
+
+      setLoading(false);
+    }
+
+    getNews();
+  }, [news.length, props]);
 
   return (
     <section className={styles.message}>
-
-      <h3 className={styles.message_title}>{formatMessage({ id: 'home.message.title'})}</h3>
-      
-      <div className={styles.message_content}>
-        <div className={styles.news_item}>
-          <Link className={styles.news_link} to="/news/2020-08-20">
-            <h4 className={styles.news_title}>{news.title[locale]}</h4>
-            <div className={styles.news_brief}>
-              <p>{news.brief[locale]}</p>
-            </div>
-          </Link>
-        </div>
+      <div className={styles.message_context}>
+        <h3 className={styles.message_title}>{formatMessage({ id: 'home.message.title'})}</h3>
+        
+        <div className={styles.message_content}>
+          {
+            isLoading ? <div className={styles.loading}>
+              Loading...
+            </div> : news.slice(0, 5).map(n => {
+              return (
+                <div className={styles.news_item} key={n.objectId}>
+                  <Link className={styles.news_link} to={`/news/${n.objectId}`}>
+                    <h4 className={styles.news_title}>{moment(new Date(n.publishedAt.iso)).format('MM/DD')} {n.title[locale]}</h4>
+                    <div className={styles.news_brief} dangerouslySetInnerHTML={{ __html: n.content[locale].slice(0, 80) + '...' }}>
+                      
+                    </div>
+                  </Link>
+                </div>
+              )
+            })
+          }
+        </div>   
       </div>
 
-      
-
+      <Link className={styles.message_button} to="/news">
+        {formatMessage({ id: 'home.message.more' })}
+      </Link>
     </section>
   );
-}
+})
+

@@ -1,6 +1,11 @@
 .purchase {
   position: fixed;
   z-index: 1000;
+
+  .purchase_visible {
+    display: block;
+  }
+
   .purchase_mask {
     position: fixed;
     top: 0;
@@ -13,13 +18,17 @@
   .purchase_context {
     display: flex;
     position: fixed;
-    width: 600px;
+    width: 700px;
     left: 50%;
     top: 50%;
 
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     padding: 30px;
+  }
+
+  .email_item {
+    display: flex;
   }
 
   .code_input,
@@ -30,6 +39,17 @@
     padding: 10px;
     background-color: #eee;
     width: 100%;
+    border-radius: 0;
+  }
+
+  .desc_item {
+    margin-top: 10px;
+  }
+
+  .button_item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .button {
@@ -38,7 +58,53 @@
     background: red;
     color: #fff;
     margin-top: 40px;
+    outline:  none;
   }
+
+  .button:active {
+    opacity: .8;
+  }
+
+  .button_disabled {
+    background: #eee;
+    color: #202020;
+    opacity: 0.5;
+   
+  }
+
+  .cancel_button {
+    padding: 5px 30px;
+    border-radius: 4px;
+    background: #eee;
+    color: #202020;
+    margin-top: 40px;
+    outline:  none;
+    margin-right: 20px;
+  }
+
+  .code_sender {
+    margin-top: 10px;
+    padding: 0 15px;
+    background-color: #4e97a3;
+    color: #fff;
+    outline: none;
+    width: 70px;
+    box-sizing: border-box;
+  }
+
+  .code_sender_disabled {
+    background-color: #ddd;
+    color: #aaa;
+  }
+
+  .code_sender:active {
+    opacity: .8;
+  }
+
+  .code_sender_disabled:active {
+    opacity: 1;
+  }
+
 
   .code_input {
 
@@ -47,18 +113,47 @@
   .purchase_payment {
     flex: 1;
 
-    .payment_image {
+    .img {
       width: 120px;
     }
+
+    .text {
+      color: #76777a;
+      margin-top: 10px;
+    }
+  }
+
+  .payment_mpay {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    background: #ffffff;
+  }
+
+  .payment_tips {
+    font-size: 20px;
+    color: #202020;
+    opacity: .8;
+  }
+
+  .purchase_show {
+    padding: 10px;
+    margin: 10px 0;
+    background: #e0fbff;
   }
 
   .purchase_movie {
     display: flex;
     flex: 1;
+    margin-bottom: 10px;
+    
 
     .movie_poster {
       width: 120px;
-      margin-right: 10px;
+      margin-right: 20px;
+      margin-bottom: 10px;
 
       img {
         width: 100%;
@@ -66,18 +161,80 @@
     }
 
     .movie_data {
-
+      flex: 1;
+      margin-right: 20px;
     }
 
     .movie_desc {
       color: #202020;
       opacity: .8;
       margin-top: 10px;
+      font-size: 12px;
     }
 
     .movie_tilte {
       font-size: 20px;
       color: #202020;
+    }
+  }
+
+  .count_item {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+    .count_label {
+      flex: 1;
+      color: #202020;
+      opacity: 0.8;
+    }
+
+    .count_input {
+      height: 40px;
+      border: none;
+      width: 40px;
+      background-color: #eee;
+      text-align: center;
+      outline: none;
+      margin: 0 10px;
+      border-radius: 0;
+    }
+
+    .count_ctrl {
+      display: flex;
+    }
+
+    .count_increator,
+    .count_decreator {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      color: #202020;
+    }
+
+    .count_increator_disabled {
+      opacity: .3;
+    }
+
+    .count_decreator_disabled {
+      opacity: .3;
+    }
+
+    .count_increator:active,
+    .count_decreator:active {
+      background-color: #eee;
+    }
+
+    .count_increator_disabled:active {
+      background-color: transparent;
+    }
+
+    .count_decreator_disabled:active {
+      background-color: transparent;
     }
   }
 }

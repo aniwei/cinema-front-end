@@ -17,6 +17,7 @@ export default function (props) {
     subject, 
     out_trade_no, 
     buyer_email, 
+    trade_no,
     buyer_pay_amount 
   } = query;
 
@@ -24,16 +25,56 @@ export default function (props) {
     window.scrollTo(0, 0);
   }, []);
 
+  const isSuccess = trade_status === 'TRADE_SUCCESS';
+  
+  const classes = classnames({
+    [styles.fail]: !isSuccess,
+    [styles.success]: isSuccess
+  }, styles.payment);
+
   return (
-    <div className={styles.payment}>
+    <div className={classes}>
       <h1 className={styles.payment_title}>
         { 
-          trade_status === 'TRADE_SUCCESS' ?
+          isSuccess ?
             formatMessage({ id: 'payment.title.success' }) :
             formatMessage({ id: 'payment.title.fail' })
         }
       </h1>
 
+      <div className={styles.payment_desc}>
+        {formatMessage({ id: 'payment.reminder' })}
+      </div>
+
+      <div className={styles.payment_content}>
+        <div className={styles.payment_item}>
+          <div className={styles.payment_item_label}>
+            {formatMessage({ id: 'payment.content.movie'})}
+          </div>
+          <div className={styles.payment_item_value}>
+            {body}
+          </div>
+        </div>
+        <div className={styles.payment_item}>
+          <div className={styles.payment_item_label}>
+            {formatMessage({ id: 'payment.content.tradeNumber'})}
+          </div>
+          <div className={styles.payment_item_value}>
+            {trade_no}
+          </div>
+        </div>
+
+        <div className={styles.payment_item}>
+          <div className={styles.payment_item_label}>
+            {formatMessage({ id: 'payment.content.outTradeNumber'})}
+          </div>
+          <div className={styles.payment_item_value}>{out_trade_no}</div>
+        </div>
+
+        <div className={styles.payment_amount}>
+          {formatMessage({ id: 'payment.content.amount' })} ${buyer_pay_amount}
+        </div>
+      </div>
       
     </div>
   );

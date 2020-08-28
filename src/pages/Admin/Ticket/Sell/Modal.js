@@ -135,7 +135,7 @@ export default function SellModal ({ movie, onSubmit, onClose }) {
       return alert(`电影票数目必须大于 0 且 小于 60`);
     }
 
-    
+    setSelected(null);
 
     return onSubmit({
       fields: {

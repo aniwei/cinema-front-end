@@ -28,9 +28,9 @@ function MovieMeta ({ rating, director, title, color, language, subtitles , year
     <div className={styles.film_meta}>
       <h2 className={styles.meta_title}>{title[locale]}</h2>
       <div className={styles.meta_data}>
-  <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
+      <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
       </div>
-      <Link to={`/programme?objectId=${objectId}`} className={styles.button}>查看影片</Link>
+      <Link to={`/programme?objectId=${objectId}`} className={styles.button}>{formatMessage({ id: 'home.programme.view' })}</Link>
     </div>
   )
 }
@@ -97,7 +97,8 @@ function Movies (props) {
 }
 
 function Programme (props) {
-  const { movies } = props;
+  const { movies, location } = props;
+  const { query } = location;
   const [movie, setMovie] = useState(movies[0]);
 
   useEffect(() => {
@@ -105,16 +106,14 @@ function Programme (props) {
     const getMovies = async () => {
       await dispatch({
         type: 'movie/movies',
-        payload: {
-  
-        }
+        payload: query
       })
     }
 
     if (movies.length === 0) {
       getMovies();
     }
-  }, [movies.length, props]);
+  }, [movies.length, props, query]);
 
   useEffect(() => {
     if (movies.length > 0) {
@@ -133,6 +132,7 @@ function Programme (props) {
   );
 }
 
-export default connect(({ movie }) => ({
-  movies: movie.movies
+export default connect(({ movie, router }) => ({
+  movies: movie.movies,
+  ...router
 }))(Programme);

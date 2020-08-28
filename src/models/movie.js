@@ -1,5 +1,5 @@
 import { history } from 'umi';
-import { movies, shows } from 'services/movie';
+import { movies, shows, trading, code, tickets } from 'services/movie';
 
 export default {
   namespace: 'movie',
@@ -10,18 +10,44 @@ export default {
 
   effects: {
     // 用户信息
-    *movies(_, { call, put }) {
-      const response = yield call(movies);
+    *code({ payload }, { call, put }) {
+      const response = yield call(code, payload);
 
-      yield put({
-        type: 'updateState',
-        payload: {
-          movies: response.map((movie, index) => {
-            movie.index = index;
-            return movie;
-          })
-        }
-      });
+      return response;
+    },
+
+    *tickets({ payload }, { call, put }) {
+      const response = yield call(tickets, payload);
+
+      return response;
+    },
+
+    *trading({ payload }, { call, put }) {
+      const response = yield call(trading, payload);
+
+      if (response) {
+        return response;
+      }
+
+      return false;
+    },
+
+    // 用户信息
+    *movies({ payload }, { call, put }) {
+      const response = yield call(movies, payload);
+
+      if (response && response.length > 0){
+        yield put({
+          type: 'updateState',
+          payload: {
+            movies: response.map((movie, index) => {
+              movie.index = index;
+              return movie;
+            })
+          }
+        });
+      }
+
     },
 
     *shows({ payload }, { call, put, select }) {

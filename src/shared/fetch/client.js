@@ -1,3 +1,4 @@
+import { formatMessage } from 'umi-plugin-react/locale';
 import fetch from 'isomorphic-fetch';
 import serverConfig from 'configs/server';
 
@@ -13,9 +14,12 @@ export default function (path, options = {}) {
     const { code, data, message } = res;
 
     if (code === 0) {
-      return Promise.resolve(data);
-    }
+      return Promise.resolve(data || {});
+    } 
 
-    return Promise.reject(message)
+    return Promise.reject(res);
+  }).catch(error => {
+    const { code } = error;
+    alert(formatMessage({ id: 'error.code.' + code }))
   })
 };

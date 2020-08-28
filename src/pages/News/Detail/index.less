@@ -24,6 +24,7 @@
   .detail_content {
     font-size: 16px;
     line-height: 2;
+    padding: 0 100px;
 
     p {
       margin-bottom: 15px;
@@ -31,3 +32,15 @@
   }
 }
 
+
+@media screen and (max-width: 600px) {
+  .news_detail {
+    .loading {
+      padding: 100px 0;
+    }
+
+    .detail_content {
+      padding: 0;
+    }
+  }
+}

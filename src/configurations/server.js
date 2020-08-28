@@ -1,7 +1,8 @@
 export default {
-  uri: 'http://api.cinema.muwu.tech',
-  endpoint: 'http://api.cinema.muwu.tech/graphql',
-  // endpoint: 'http://127.0.0.1:4000/graphql',
+  uri: process.env.NODE_ENV == 'development' ? 
+    'http://localhost:4000' : 'http://api.cinema.muwu.tech',
+  endpoint: process.env.NODE_ENV == 'development' ? 
+    'http://localhost:4000' : 'http://api.cinema.muwu.tech/graphql',
   timeout: 60000,
   // uri: 'http://dev.weim.com/graphql?debugger=1'
 };

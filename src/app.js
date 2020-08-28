@@ -9,11 +9,14 @@ export const dva = {
         const firstError = error.graphQLErrors[0];
         const { body } = firstError.extensions.response || {};
 
-        if (body.code === 209) {
-          window.localStorage.removeItem('token');
-
-          return window.location.replace('/admin/user.signin');
+        if (body) {
+          if (body.code === 209) {
+            window.localStorage.removeItem('token');
+  
+            return window.location.replace('/admin/user.signin');
+          }
         }
+
       }
 
       console.error(error.message);

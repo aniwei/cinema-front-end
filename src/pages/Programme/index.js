@@ -30,24 +30,14 @@ function MovieMeta ({ rating, director, title, color, subtitles, format, languag
     <div className={styles.film_meta}>
       <h2 className={styles.meta_title}>{title[locale]}</h2>
       <div className={styles.meta_data}>
-        <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>Group: {rating}</span>
+        <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
       </div>
     </div>
   )
 }
 
-function MovieDetail ({ plot, trailer, stills }) {
+function MovieDetail ({ plot, trailer, stills, notes }) {
   const locale = getLocale();
-
-  const swiperOptions = {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    spaceBetween: 30,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  }
 
   return (
     <div className={styles.film_detail}>
@@ -56,6 +46,13 @@ function MovieDetail ({ plot, trailer, stills }) {
         <p className={styles.detail_desc}>{plot[locale]}</p>
         
       </div>
+
+      {
+        notes && <div className={styles.detail_notes}>
+          <h4 className={styles.detail_title}>{formatMessage({ id: 'programme.notes.title' })}</h4>
+          <div className={styles.detail_desc} dangerouslySetInnerHTML={{ __html: notes[locale] }}></div>
+        </div>
+      }
 
       {
         trailer && <div className={styles.detail_trailer}>
@@ -147,7 +144,7 @@ function Movies (props) {
 }
 
 function TimeItem (props) {
-  const { beginTime, endTime, price, tickets, onClick } = props;
+  const { beginTime, endTime, price, tickets, onClick, movie } = props;
 
   return (
     <div className={styles.time_item}>
@@ -156,12 +153,21 @@ function TimeItem (props) {
         <span className={styles.end_time}>{endTime}</span>
       </div>
 
-      {/* <div className={styles.price}>
-        <span>$</span>{price}
+      <div className={styles.tickets}>
+        {tickets === 0 ? formatMessage({ id: 'programme.shows.sellout' }) : null}
       </div>
-      <div className={styles.actions}>
-        <button className={styles.button} onClick={onClick}>购买</button>
-      </div> */}
+
+      {
+        movie.status === 'ON_SALES' && tickets > 0 ?
+          <>
+            <div className={styles.price}>
+              <span>$</span>{price}
+            </div>
+            <div className={styles.actions}>
+              <button className={styles.button} onClick={onClick}>{formatMessage({ id: 'programme.shows.buy.button'})}</button>
+            </div> 
+          </> : null
+      }
     </div>
   )
 }
@@ -178,6 +184,10 @@ function DatesSelect (props) {
     setDate(value);
   }
 
+  const onClose = () => {
+    setSelectedShow(null);
+  }
+
   let newDates = [];
 
   dates.forEach((show, key) => {
@@ -191,7 +201,7 @@ function DatesSelect (props) {
     return a.key > b.key ? 1 : -1
   });
 
-  console.log(newDates)
+  
 
   useEffect(() => {
     const first = newDates[0];
@@ -229,12 +239,13 @@ function DatesSelect (props) {
           }).map(date => {
             return (
               <TimeItem 
+                movie={movie}
                 objectId={date.objectId}
                 key={date.timestamp}
                 beginTime={moment(new Date(date.timestamp * 1000)).format(`HH:mm`)}
                 endTime={moment(new Date((date.timestamp + 60 * movie.length) * 1000)).format(`HH:mm`)}
-                price="60.00"
-                tickets={60}
+                price={date.price}
+                tickets={date.tickets}
                 onClick={(e) => onButtonClick(date, e)}
               />
             );
@@ -243,11 +254,14 @@ function DatesSelect (props) {
         
       </div>
 
-      {/* <Purchase 
-        movie={movie} 
-        show={selectedShow} 
-        visible={!!selectedShow} 
-      /> */}
+      {
+        selectedShow && <Purchase 
+          movie={movie} 
+          show={selectedShow} 
+          visible={!!selectedShow} 
+          onClose={onClose}
+        />
+      }
     </div>
   );
 }
@@ -313,9 +327,7 @@ function Programme (props) {
     const getMovies = async () => {
       await dispatch({
         type: 'movie/movies',
-        payload: {
-  
-        }
+        payload: query
       })
     }
 
@@ -329,7 +341,6 @@ function Programme (props) {
     }
 
     setMovie(selected);
-
 
     if (movies.length === 0) {
       getMovies();
@@ -353,6 +364,6 @@ function Programme (props) {
   );
 }
 
-export default connect(({ movie }) => ({
-  movies: movie.movies
+export default connect(({ movie, router }) => ({
+  movies: movie.movies,
 }))(Programme);
