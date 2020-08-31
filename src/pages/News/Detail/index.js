@@ -44,7 +44,7 @@ export default connect(({ news }) => {
 
       getSingleNews();
     }
-  }, [newsDetail, newsId, props]);
+  }, [newsDetail]);
 
   return (
     <div className={styles.news_detail}>

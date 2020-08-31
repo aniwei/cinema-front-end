@@ -100,7 +100,7 @@ function Movies (props) {
     if (ref.current !== null && ref.current.swiper !== null) {
       ref.current.swiper.slideTo(movie.index);
     }
-  }, [movie, movie.index]);
+  }, [movie]);
 
   const onNavigationClick = (type) => {
     if (ref.current !== null && ref.current.swiper !== null) {
@@ -210,7 +210,7 @@ function DatesSelect (props) {
   useEffect(() => {
     const first = newDates[0];
     setDate([first.key, first.show]);
-  }, [dates, newDates]);
+  }, [dates]);
 
   const first = newDates[0];
   const [date, setDate] = useState([first.key, first.show]);
@@ -294,7 +294,7 @@ function Shows (props) {
 
       getMovieShows();
     }
-  }, [movie, movie.shows, props]);
+  }, [movie]);
 
   const movieShows = movie.shows || [];
   const dates = new Map();
@@ -350,7 +350,7 @@ function Programme (props) {
     if (movies.length === 0) {
       getMovies();
     }
-  }, [movies, movies.length, props]);
+  }, [movies]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

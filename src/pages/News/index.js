@@ -31,7 +31,7 @@ export default connect(({ news }) => {
     }
 
     getNews();
-  }, [news.length, props]);
+  }, [news.length]);
 
   return (
     <div className={styles.news}>

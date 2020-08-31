@@ -35,7 +35,7 @@ function TicketType ({ show, onSelect }) {
   useEffect(() => {
     setTicketType('ORIGINAL');
     onSelect('ORIGINAL');
-  }, [onSelect, show]);
+  }, [show]);
 
   const onTicketTypeClick = (type) => {
     setTicketType(type.value);
@@ -123,7 +123,7 @@ function Email ({ show, onInputEmail, onInputCode, dispatch }) {
     setCode(null);
     setSeconds(0);
     clearTimeout(memo.timer);
-  }, [memo.timer, show]);
+  }, [show]);
 
 
   const onEmailChange = ({ target }) => {
@@ -299,8 +299,6 @@ function Form ({ show, movie, onClose, dispatch }) {
         discount = 0.8;
       }
     }
-
-    alert(notice[locale]);
 
     const yes = window.confirm(formatMessage({ id: 'common.purchase.check' }, {
       title: `${movie.title[locale]} ${show.date} ${show.time}`,

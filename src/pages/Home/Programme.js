@@ -113,7 +113,7 @@ function Programme (props) {
     if (movies.length === 0) {
       getMovies();
     }
-  }, [movies.length, props, query]);
+  }, [movies.length]);
 
   useEffect(() => {
     if (movies.length > 0) {
