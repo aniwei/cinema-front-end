@@ -5,7 +5,7 @@ export default {
   "about.feature.planing.title": "Programação",
   "about.feature.mission": "Como uma plataforma de intercâmbio entre o público e os cineastas, a Cinemateca está empenhada em impulsionar a cultura da arte cinematográfica e a promoção de filmes locais no exterior, cultivando o sentido artístico da população de Macau e dos aficionados de cinema. Espera-se que residentes e visitantes possam aproveitar bem a Cinemateca e desfrutar de mais filmes de qualidade oriundos de várias partes do mundo.",
   "about.feature.planing": "Com base nesta postura e público alvo, a programação da Cinemateca．Paixão ocupa-se de aspectos artísticos e culturais visando a oferta de uma escolha diversificada de filmes. Ao maximizar o público base, tentaremos prover às necessidades dos espectadores de diferentes idades e preferências, fazendo da Cinemateca uma plataforma de partilha para cineastas, críticos de cinema e público em geral, sempre no âmbito do debate alargado.",
-  "about.openhour.title": "Horário",
+  "about.openhour.title": "Horários",
   "about.openhour.info.title": "Sala de Exposição e Informação Cinematográfica",
   "about.openhour.info.desc": "Terça a Domingo: 10am - 8pm(Encerra à Segunda) (Aberta aos feriados)",
   "about.openhour.ticket.title": "Bilheteira",

@@ -15,7 +15,7 @@ export default {
   'common.purchase.buy.quantity': 'Purchase quantity',
   'common.purchase.cancel.button': 'Cancel',
   'common.purchase.email.sender': 'Send',
-  'common.purchase.check': 'Please confirm your booking.\n\nBooking confirmation: {title} x {count}\nTotal amount: {amount}\n\nPlease complete your payment within five minutes.',
+  'common.purchase.check': 'Please confirm your booking.\n\nBooking confirmation: {title} x {count} {ticketType} \nTotal amount: {amount}\n\nPlease complete your payment within five minutes.',
   'common.movie.color': 'Color',
   'common.movie.blackwhite': 'Black and White',
   'footer.about.title': 'About Us',

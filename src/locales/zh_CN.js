@@ -15,7 +15,7 @@ export default {
   'common.purchase.buy.quantity': '购买数量',
   'common.purchase.cancel.button': '取消',
   'common.purchase.email.sender': '获取',
-  'common.purchase.check': '请核对订单信息\n\n订单信息: {title} x {count}\n总金额: {amount}\n\n请在5分钟内完成支付',
+  'common.purchase.check': '请核对订单信息\n\n订单信息: {title} x {count} {ticketType} \n总金额: {amount}\n\n请在5分钟内完成支付',
   'common.movie.color': '彩色',
   'common.movie.blackwhite': '黑白',
   'footer.about.title': '关于本馆',

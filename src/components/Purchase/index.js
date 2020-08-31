@@ -8,13 +8,64 @@ import styles from './index.less';
 
 import mpayLogo from '../../assets/common/mpay.png';
 
+const discounts = {
+  ORIGINAL: 1,
+  STUDENT: 0.5,
+  SENIOR: 0.5,
+}
+
+const notice = {
+  zh_CN: `【注意事项】\n\n- 凡购买优惠票者，入场前请出示有效证件。\n- 网上8折优惠只限于一次性购买同一场次普通票十张。\n- 优惠票与折扣优惠不能重叠使用。`,
+  zh_MO: `【注意事項】\n\n- 凡購買優惠票者，入場前請出示有效證件。\n- 網上8折優惠只限於一次性購買同一場次普通票十張。\n- 優惠票與折扣優惠不能重疊使用。`,
+  en_US: `【Notice】\n\n- For those who purchase concessionary tickets, a valid proof of identity must be shown before entering the venue.\n- A 20% discount is offered to the individual who purchases 10 regular tickets for the same session at each online transactions.\n- Concessionary tickets and discount offers cannot overlap.`,
+  pt_PT: `【Aviso】\n\n- Para quem comprar bilhetes concessionados, por favor, mostre um documento válido antes entrar no cinema.\n- Na compra de 10 bilhetes regulares da mesma sessão, é oferecido 20% de desconto, em cada transação online.\n- Os bilhetes concessionados e as ofertas de desconto não podem ser acumuladas.
+  `
+}
+
+function TicketType ({ show, onSelect }) {
+  const ticketTypes = [
+    { value: 'ORIGINAL', text: formatMessage({ id: 'payment.ticket.type.original' }) },
+    { value: 'STUDENT', text: formatMessage({ id: 'payment.ticket.type.student' }) },
+    { value: 'SENIOR', text: formatMessage({ id: 'payment.ticket.type.senior' }) }
+  ];
+
+  const [ticketType, setTicketType] = useState('ORIGINAL');
+  
+
+  useEffect(() => {
+    setTicketType('ORIGINAL');
+    onSelect('ORIGINAL');
+  }, [onSelect, show]);
+
+  const onTicketTypeClick = (type) => {
+    setTicketType(type.value);
+    onSelect(type.value);
+  }
+
+  return <div className={styles.ticket_types}>
+    {
+      ticketTypes.map(type => {
+        const classes = classnames(styles.ticket_type, { 
+          [styles.ticket_type_selected]: type.value === ticketType
+        })
+
+        return (
+          <div className={classes} key={type.value} onClick={(event) => onTicketTypeClick(type)}>
+            <span className={styles.ticket_type_text}>{type.text}</span>
+          </div>
+        )
+      })
+    }
+  </div>
+}
+
 function Show (props) {
   const locale = getLocale();
 
   const { movie, date, time, tickets } = props;
   return <div className={styles.purchase_show}>
     <div>{movie.title[locale]} {date} {time}</div>
-    <div>Remaining tickets: {tickets}</div> 
+    <div>{formatMessage({ id: 'payment.remaining.tickets' })} {tickets}</div> 
   </div>
 }
 
@@ -24,27 +75,37 @@ function Movie (props) {
 
   return (
     <div className={styles.purchase_movie}>
-      <div className={styles.movie_poster}>
-        <img src={poster} className={styles.poster_image} />
-      </div>
-      <div className={styles.movie_data}>
-        <h4 className={styles.movie_tilte}>{title[locale]}</h4>
-        <div className={styles.movie_desc}>
-          <div className={styles.desc_item}><span>{director[locale]}</span></div>
-          <div className={styles.desc_item}>
-            <span>{region[locale]}</span> / 
-            <span>{year}</span> /  
-            <span>{length}min</span> / 
-            <span>{formatMessage({ id: `common.rating` })}{rating}</span> / 
-            <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / 
-            <span>{format}</span>
-          </div> 
-          <div className={styles.desc_item}>  
-            <span>{language[locale]}</span> /  
-            <span>{subtitles[locale]}</span>
+      <div className={styles.purchase_movie_inner}>
+        <div className={styles.movie_poster}>
+          <img src={poster} className={styles.poster_image} />
+        </div>
+        <div className={styles.movie_data}>
+          <h4 className={styles.movie_tilte}>{title[locale]}</h4>
+          <div className={styles.movie_desc}>
+            {/* <div className={styles.desc_item}><span>{director[locale]}</span></div> */}
+            <div className={styles.desc_item}>
+              <span>{region[locale]}</span> / 
+              <span> {year}</span> /   
+              <span> {length}min</span> / 
+              <span> {formatMessage({ id: `common.rating` })}{rating}</span>
+              {/* <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / 
+              <span>{format}</span> */}
+            </div> 
+            <div className={styles.desc_item}>  
+              <strong>* {formatMessage({ id: 'payment.ticket.rate.' + rating })}</strong>
+              {/* <span>{language[locale]}</span> /   */}
+              {/* <span>{subtitles[locale]}</span> */}
+            </div>
           </div>
         </div>
       </div>
+
+      <div className={styles.notice_desc} onClick={() => {
+        alert(notice[locale])
+      }}>
+        <span>{formatMessage({ id: 'payment.notice.desc' })}</span>
+      </div>
+      <div className={styles.notice_item} dangerouslySetInnerHTML={{ __html: notice[locale] }}></div>
     </div>
   )
 }
@@ -133,7 +194,7 @@ function MPay () {
   return (
     <div className={styles.payment_mpay}>
       <img src={mpayLogo} className={styles.img} />
-      <span className={styles.text}>{formatMessage({ id: 'common.payment.mpay.tips' })}</span>
+      {/* <span className={styles.text}>{formatMessage({ id: 'common.payment.mpay.tips' })}</span> */}
     </div>
   );
 }
@@ -149,7 +210,7 @@ function Counter ({ show, onCounting }) {
   }
 
   const onIncoreatorClick = () => {
-    if (count < 4) {
+    if (count < show.tickets) {
       setCount(count + 1);
       onCounting(count + 1);
     }
@@ -173,7 +234,7 @@ function Counter ({ show, onCounting }) {
         disabled
       />
       <span className={classnames(styles.count_decreator, {
-        [styles.count_decreator_disabled]: count > 3
+        [styles.count_decreator_disabled]: count >= show.tickets
       })} onClick={onIncoreatorClick}>
         +
       </span>
@@ -209,6 +270,10 @@ function Form ({ show, movie, onClose, dispatch }) {
     data.count = count;
   }
 
+  const onTicketTypeSelect = (type) => {
+    data.type = type;
+  }
+
   const onConfirm = async () => {
 
     if (disabledSubmit) {
@@ -223,20 +288,26 @@ function Form ({ show, movie, onClose, dispatch }) {
       return alert(formatMessage({ id: 'common.purchase.code.placeholder'}));
     }
 
-    if (!data.showId) {
-      return alert('show')
-    }
-
-    if (data.count < 1 || data.count > 4) {
+    if (data.count < 1 || data.count > show.tickets) {
       return alert('count');
     }
-    
+
+    let discount = discounts[data.type] || 1;
+
+    if (data.count >= 10) {
+      if (data.type === 'ORIGINAL') {
+        discount = 0.8;
+      }
+    }
+
+    alert(notice[locale]);
 
     const yes = window.confirm(formatMessage({ id: 'common.purchase.check' }, {
       title: `${movie.title[locale]} ${show.date} ${show.time}`,
       count: data.count,
       email: data.email,
-      amount: Number(Number(data.count) * Number(show.price)).toFixed(2)
+      amount: Number(Number(data.count) * Number(show.price) * discount).toFixed(2),
+      ticketType: formatMessage({ id: 'payment.ticket.type.' + data.type.toLowerCase() })
     }));
 
     if (yes) {
@@ -278,9 +349,8 @@ function Form ({ show, movie, onClose, dispatch }) {
         dispatch={dispatch}
       />
       <Show {...show} movie={movie} />
-      <Counter  
-        onCounting={onCounting}
-      />
+      <TicketType show={show} onSelect={onTicketTypeSelect} />
+      <Counter onCounting={onCounting} show={show} />
 
       <div className={styles.button_item}>
         <button onClick={onClose} className={classnames(styles.button, styles.cancel_button)}>{formatMessage({ id: 'common.purchase.cancel.button' })}</button>
@@ -293,7 +363,6 @@ function Form ({ show, movie, onClose, dispatch }) {
 function Purchase (props) {
   const { movie, visible, show, onClose } = props;
   
-
   const classes = classnames({
     [styles.purchase_visible]: visible,
   }, styles.purchase);

@@ -233,6 +233,7 @@
 
     .message_context {
       display: flex;
+      flex-direction: column;
     }
 
 
@@ -266,6 +267,7 @@
       font-size: 20px;
       color: #202020;
       position: relative;
+      margin-bottom: 20px;
     }
 
     .message_title::after {
@@ -342,6 +344,12 @@
             width: 220px;
           }
         }
+      }
+    }
+
+    .message {
+      .message_context {
+        flex-direction: row;
       }
     }
   }

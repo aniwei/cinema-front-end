@@ -5,5 +5,6 @@ export default {
   'programme.stills.title': '剧照',
   'programme.shows.empty': '暂无排片',
   'programme.shows.buy.button': '购买',
-  'programme.shows.sellout': '已售罄'
+  'programme.shows.sellout': '已售罄',
+  'programme.shows.off': '停止售票'
 }

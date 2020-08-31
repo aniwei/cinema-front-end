@@ -19,8 +19,10 @@ function Feature (props) {
 
   return (
     <div className={styles.feature}>
-      <img className={styles.feature_icon} src={icon} />
-      <h3 className={styles.feature_title}>{title}</h3>
+      <div className={styles.feature_header}>
+        <img className={styles.feature_icon} src={icon} />
+        <h3 className={styles.feature_title}>{title}</h3>
+      </div>
       <p className={styles.feature_text}>{text}</p>
     </div>
   )
@@ -31,9 +33,11 @@ function PlanningFeature (props) {
 
   return (
     <div className={classnames(styles.feature, styles.planning)}>
+      <div className={styles.feature_header}>
+        <img className={styles.feature_icon} src={icon} />
+        <h3 className={styles.feature_title}>{title}</h3>
+      </div>
       <p className={styles.feature_text}>{text}</p>
-      <h3 className={styles.feature_title}>{title}</h3>
-      <img className={styles.feature_icon} src={icon} />
     </div>
   );
 }

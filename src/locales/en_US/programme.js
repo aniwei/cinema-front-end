@@ -5,5 +5,6 @@ export default {
   'programme.stills.title': 'Stills',
   'programme.shows.empty': 'No arrangement',
   'programme.shows.buy.button': 'Buy',
-  'programme.shows.sellout': 'Sold out'
+  'programme.shows.sellout': 'Sold out',
+  'programme.shows.off': 'Unavailable for sale'
 }

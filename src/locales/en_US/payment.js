@@ -5,5 +5,14 @@ export default {
   'payment.content.outTradeNumber': 'Reference no.:',
   'payment.content.movie': 'Ticket information:',
   'payment.content.amount': 'Total amount:',
-  'payment.reminder': 'Kind Reminder: Please refer to your email for the ticketing confirmation and the e-ticket(s). Thank you.'
+  'payment.remaining.tickets': 'Remaining tickets: ', 
+  'payment.reminder': 'Kind Reminder: Please refer to your email for the ticketing confirmation and the e-ticket(s). Thank you.',
+  'payment.ticket.type.original': 'Regular ticket',
+  'payment.ticket.type.senior': 'Senior ticket',
+  'payment.ticket.type.student': 'Student ticket',
+  'payment.ticket.rate.A': 'Suitable for all ages',
+  'payment.ticket.rate.B': 'Not suitable for children under 13',
+  'payment.ticket.rate.C': 'For persons aged 13 and above only, but not suitable for age under 18',
+  'payment.ticket.rate.D': 'Persons aged 18 and above only',
+  'payment.notice.desc': 'View concessionary offers'
 }

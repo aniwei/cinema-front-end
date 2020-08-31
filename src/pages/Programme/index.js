@@ -144,7 +144,7 @@ function Movies (props) {
 }
 
 function TimeItem (props) {
-  const { beginTime, endTime, price, tickets, onClick, movie } = props;
+  const { beginTime, endTime, price, tickets, onClick, movie, status } = props;
 
   return (
     <div className={styles.time_item}>
@@ -153,12 +153,16 @@ function TimeItem (props) {
         <span className={styles.end_time}>{endTime}</span>
       </div>
 
-      <div className={styles.tickets}>
-        {tickets === 0 ? formatMessage({ id: 'programme.shows.sellout' }) : null}
+      <div className={styles.status}>
+        {
+          status === 'OFF_SALES' ?
+            formatMessage({ id: 'programme.shows.off' }) : 
+            (tickets === 0 ? formatMessage({ id: 'programme.shows.sellout' }) : formatMessage({ id: 'payment.remaining.tickets' }) + ' ' + tickets)
+        }
       </div>
 
       {
-        movie.status === 'ON_SALES' && tickets > 0 ?
+        movie.status === 'ON_SALES' && status !== 'OFF_SALES' && tickets > 0 ?
           <>
             <div className={styles.price}>
               <span>$</span>{price}
@@ -246,6 +250,7 @@ function DatesSelect (props) {
                 endTime={moment(new Date((date.timestamp + 60 * movie.length) * 1000)).format(`HH:mm`)}
                 price={date.price}
                 tickets={date.tickets}
+                status={date.status}
                 onClick={(e) => onButtonClick(date, e)}
               />
             );
