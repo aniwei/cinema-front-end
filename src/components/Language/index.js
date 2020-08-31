@@ -8,8 +8,8 @@ import styles from './index.less';
 const langs = [
   { text: '繁', key: 'zh_MO' },
   { text: 'EN', key: 'en_US' },
-  { text: '', key: 'zh_CN' },
-  { text: '', key: 'pt_PT' }
+  { text: '简', key: 'zh_CN' },
+  { text: 'PT', key: 'pt_PT' }
 ];
 
 const INQUIRED_LOCALE_SETTING_KEY = 'locale';
