@@ -21,16 +21,38 @@ function Movie (props) {
   )
 }
 
-function MovieMeta ({ rating, director, title, color, language, subtitles , year, length, format, region, objectId }) {
+function MoviesMeta ({ releasedAt, groups, objectId }) {
+  const locale = getLocale();
+  const elements = groups.map((movie, index) => {
+    if (index < groups.length -1) {
+        return <>
+          <h2  className={styles.meta_title} key={movie.objectId}>{movie.title[locale]}</h2>/
+        </>
+    } else {
+        return <h2 className={styles.meta_title} key={movie.objectId}>{movie.title[locale]}</h2>
+    }
+  });
+
+  return (
+    <div className={styles.film_meta}>
+      <div className={styles.meta_data}>
+        {elements}
+      </div>
+      <Link to={`/programme/${releasedAt}?objectId=${objectId}&locale=${locale}`} className={styles.button}>{formatMessage({ id: 'home.programme.view' })}</Link>
+    </div>
+  )
+}
+
+function MovieMeta ({ releasedAt, rating, director, title, color, language, subtitles , year, length, format, region, objectId }) {
   const locale = getLocale();
 
   return (
     <div className={styles.film_meta}>
       <h2 className={styles.meta_title}>{title[locale]}</h2>
       <div className={styles.meta_data}>
-      <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}min</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
+      <span>{director[locale]}</span> / <span>{region[locale]}</span> / <span>{year}</span> / <span>{length}{formatMessage({ id: 'common.movie.min' })}</span> / <span>{format}</span> / <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / <span>{language[locale]}</span> / <span>{subtitles[locale]}</span> / <span>{formatMessage({ id: `common.rating` })}{rating}</span>
       </div>
-      <Link to={`/programme?objectId=${objectId}`} className={styles.button}>{formatMessage({ id: 'home.programme.view' })}</Link>
+      <Link to={`/programme/${releasedAt}?objectId=${objectId}&locale=${locale}`} className={styles.button}>{formatMessage({ id: 'home.programme.view' })}</Link>
     </div>
   )
 }
@@ -91,40 +113,38 @@ function Movies (props) {
         <div className="swiper-button-prev" onClick={(e) => onNavigationClick('prev', e)}></div>
         <div className="swiper-button-next" onClick={(e) => onNavigationClick('next', e)}></div>
       </div>
-      {movie && <MovieMeta {...movie} />}
+      {movie && ( movie.compose ? <MoviesMeta {...movie}  /> :  <MovieMeta {...movie} />)}
     </div>
   );
 }
 
 function Programme (props) {
-  const { movies, location } = props;
+  const { location, dispatch } = props;
   const { query } = location;
+  const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState(movies[0]);
 
-  useEffect(() => {
-    const { dispatch } = props;
-    const getMovies = async () => {
-      await dispatch({
-        type: 'movie/movies',
-        payload: query
-      })
-    }
+  const getMovies = async () => {
+    const movies = await dispatch({
+      type: 'movie/movies',
+      payload: { ...query, status: 'REMOVE' }
+    });
 
-    if (movies.length === 0) {
-      getMovies();
-    }
-  }, [movies.length]);
+    setMovies(movies);
+  }
 
   useEffect(() => {
-    if (movies.length > 0) {
-      setMovie(movies[0]);
-    }
+    getMovies();
+  }, []);
+
+  useEffect(() => {
+    setMovie(movies[0]);
   }, [movies]);
 
   const onChange = useCallback(function () {
     setMovie(movies[this.activeIndex]);
   }, [movies]);
-
+ 
   return (
     <div className={styles.programme}>
       {movies.length > 0 && movie && <Movies movie={movie} movies={movies} onChange={onChange} />}
@@ -133,6 +153,5 @@ function Programme (props) {
 }
 
 export default connect(({ movie, router }) => ({
-  movies: movie.movies,
   ...router
 }))(Programme);

@@ -18,6 +18,7 @@ export default {
   'common.purchase.check': '请核对订单信息\n\n订单信息: {title} x {count} {ticketType} \n总金额: {amount}\n\n请在5分钟内完成支付',
   'common.movie.color': '彩色',
   'common.movie.blackwhite': '黑白',
+  'common.movie.min': '分钟',
   'footer.about.title': '关于本馆',
   'footer.about.desc': '恋爱・电影馆位于澳门恋爱巷九至十三号，毗邻澳门的著名世遗景点「大三巴牌坊」（即「圣保禄大教堂遗址」）。电影馆楼高三层，是一个集合电影欣赏、展览空间、本土影像保存、以及电影书籍阅读等功能的空间。',
   'footer.about.address': '恋爱巷9号至13号',

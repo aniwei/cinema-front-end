@@ -42,7 +42,7 @@ export default connect(({ news }) => {
             <div className={styles.news_item} key={n.objectId}>
               <div className={styles.news_date}>{moment(new Date(n.publishedAt.iso)).format(`MM-DD`)}</div>
               <h3 className={styles.news_title}>
-                <Link className={styles.news_link} to={`/news/${n.objectId}`}>
+                <Link className={styles.news_link} to={`/news/${n.objectId}?locale=${locale}`}>
                   {n.title[locale]}
                 </Link>
               </h3>

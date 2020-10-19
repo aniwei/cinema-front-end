@@ -4,4 +4,6 @@ export default {
   "menus.topic": "Topic",
   "menus.news": "Latest News",
   "menus.about": "About Us",
+  "menus.programme.sept": "September Programme",
+  "menus.programme.oct": "October Programme"
 };

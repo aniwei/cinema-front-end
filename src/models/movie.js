@@ -37,17 +37,43 @@ export default {
       const response = yield call(movies, payload);
 
       if (response && response.length > 0){
-        yield put({
-          type: 'updateState',
-          payload: {
-            movies: response.map((movie, index) => {
-              movie.index = index;
-              return movie;
-            })
+        const movies = response.slice();
+        const groups = new Map();
+
+        const composes = response.filter(movie => {
+          return movie.compose;
+        });
+
+        composes.forEach(movie => {
+          let movies = groups.get(movie.composeId);
+
+          if (!movies) {
+            groups.set(movie.composeId, movies = []);
           }
+
+          movies[movie.composeIndex - 1] = movie;
+
+          if (movie.composeIndex - 1 === 0) {
+            movie.groups = movies;
+          }
+        });
+
+        response.forEach((movie, index) => {
+          if (movie.compose) {
+            if (movie.composeIndex - 1 > 0) {
+              const indexOf = movies.indexOf(movie);
+              movies.splice(indexOf, 1);
+            }
+          }
+        });
+  
+        return movies.map((movie, index) => {
+          movie.index = index;
+          return movie;
         });
       }
 
+      return [];
     },
 
     *shows({ payload }, { call, put, select }) {

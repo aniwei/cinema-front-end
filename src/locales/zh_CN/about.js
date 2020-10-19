@@ -10,6 +10,17 @@ export default {
   "about.openhour.info.desc": "星期二至日: 上午 10 时至晚上 8 时(逢星期一休馆)(公众假期皆开放)",
   "about.openhour.ticket.title": "售票处",
   "about.openhour.ticket.desc": "星期二至日: 上午 10 时至晚上 11 时 30 分(逢星期一休馆)(公众假期皆开放)",
+  "about.lease.title": "放映厅租赁及广告播放",
+  "about.lease.desc": "放映厅设有60个座位，可申请租赁举办放映、电影相关之活动或申请播放广告。",
+  "about.lease.fee.title": "费用：",
+  "about.lease.zoom.title": "放映厅租赁",
+  "about.lease.zoom.content": "<p>（一）上午时段（10:00-14:00）　800.00澳门元</p><p>（二）下午时段（14:00-18:00）    900.00澳门元</p><p>（三）晚上时段（19:00-23:00）    1,000.00澳门元</p>",
+  "about.lease.advert.title": "广告播放",
+  "about.lease.advert.content": "（25次）1,500.00澳门元",
+  "about.lease.pdf.1": "恋爱‧电影馆放映厅租赁规定.pdf",
+  "about.lease.pdf.2": "恋爱‧电影馆放映厅租赁申请表.pdf",
+  "about.lease.pdf.3": "恋爱‧电影馆广告播放申请规定.pdf",
+  "about.lease.pdf.4": "恋爱‧电影馆广告播放申请表.pdf",
 };
 
 

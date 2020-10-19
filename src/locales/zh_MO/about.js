@@ -10,6 +10,17 @@ export default {
   "about.openhour.info.desc": "星期二至日: 上午 10 時至晚上 8 時(逢星期一休館)(公眾假期皆開放)",
   "about.openhour.ticket.title": "售票處",
   "about.openhour.ticket.desc": "星期二至日: 上午 10 時至晚上 11 時 30 分(逢星期一休館)(公眾假期皆開放)",
+  "about.lease.title": "放映廳租賃及廣告播放",
+  "about.lease.desc": "放映廳設有60個座位，可申請租賃舉辦放映、電影相關之活動或申請播放廣告。",
+  "about.lease.fee.title": "費用：",
+  "about.lease.zoom.title": "放映廳租賃",
+  "about.lease.zoom.content": "<p>（一）上午時段（10:00-14:00）　800.00澳門元</p><p>（二）下午時段（14:00-18:00）    900.00澳門元</p><p>（三）晚上時段（19:00-23:00）    1,000.00澳門元</p>",
+  "about.lease.advert.title": "廣告播放",
+  "about.lease.advert.content": "（25次）1,500.00澳門元",
+  "about.lease.pdf.1": "戀愛‧電影館放映廳租賃規定.pdf",
+  "about.lease.pdf.2": "戀愛‧電影館放映廳租賃申請表.pdf",
+  "about.lease.pdf.3": "戀愛‧電影館廣告播放申請規定.pdf",
+  "about.lease.pdf.4": "戀愛‧電影館廣告播放申請表.pdf",
 };
 
 

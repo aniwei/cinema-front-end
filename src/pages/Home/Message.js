@@ -44,7 +44,7 @@ export default connect(({ news }) => {
             </div> : news.slice(0, 5).map(n => {
               return (
                 <div className={styles.news_item} key={n.objectId}>
-                  <Link className={styles.news_link} to={`/news/${n.objectId}`}>
+                  <Link className={styles.news_link} to={`/news/${n.objectId}?locale=${locale}`}>
                     <h4 className={styles.news_title}>{moment(new Date(n.publishedAt.iso)).format('MM/DD')} {n.title[locale]}</h4>
                     <div className={styles.news_brief} dangerouslySetInnerHTML={{ __html: n.content[locale].slice(0, 80) + '...' }}>
                       
@@ -57,7 +57,7 @@ export default connect(({ news }) => {
         </div>   
       </div>
 
-      <Link className={styles.message_button} to="/news">
+      <Link className={styles.message_button} to={`/news?locale=${locale}`}>
         {formatMessage({ id: 'home.message.more' })}
       </Link>
     </section>

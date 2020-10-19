@@ -69,6 +69,48 @@ function Show (props) {
   </div>
 }
 
+
+function MovieMeta (props) {
+  const { compose, groups } = props;
+  const locale = getLocale();
+
+  if (compose) {
+    return null;
+  }
+
+  const { rating, year, length, region } = props;
+
+  return <>
+    <span>{region[locale]}</span> / 
+    <span> {year}</span> /   
+    <span> {length}min</span> / 
+    <span> {formatMessage({ id: `common.rating` })}{rating}</span>
+  </>
+}
+
+function MovieTitle (props) {
+  const locale = getLocale();
+  const { compose, groups } = props;
+
+  if (compose) {
+
+    return <h4 className={styles.movie_tilte}>
+      {
+        groups.map(group => {
+          return `《${group.title[locale]}》`
+        }).join('')
+      }
+    </h4>
+  }
+
+  const { title } = props;
+
+
+  return (
+    <h4 className={styles.movie_tilte}>{title[locale]}</h4>
+  );
+}
+
 function Movie (props) {
   const { rating, poster, director, title, color, subtitles, format, language, year, length, region } = props;
   const locale = getLocale();
@@ -80,16 +122,10 @@ function Movie (props) {
           <img src={poster} className={styles.poster_image} />
         </div>
         <div className={styles.movie_data}>
-          <h4 className={styles.movie_tilte}>{title[locale]}</h4>
+          <MovieTitle {...props} />
           <div className={styles.movie_desc}>
-            {/* <div className={styles.desc_item}><span>{director[locale]}</span></div> */}
             <div className={styles.desc_item}>
-              <span>{region[locale]}</span> / 
-              <span> {year}</span> /   
-              <span> {length}min</span> / 
-              <span> {formatMessage({ id: `common.rating` })}{rating}</span>
-              {/* <span>{formatMessage({ id: color ? 'common.movie.color' : 'common.movie.blackwhite' })}</span> / 
-              <span>{format}</span> */}
+              <MovieMeta {...props}  />
             </div> 
             <div className={styles.desc_item}>  
               <strong>* {formatMessage({ id: 'payment.ticket.rate.' + rating })}</strong>
@@ -300,43 +336,42 @@ function Form ({ show, movie, onClose, dispatch }) {
       }
     }
 
-    const yes = window.confirm(formatMessage({ id: 'common.purchase.check' }, {
-      title: `${movie.title[locale]} ${show.date} ${show.time}`,
-      count: data.count,
-      email: data.email,
-      amount: Number(Number(data.count) * Number(show.price) * discount).toFixed(2),
-      ticketType: formatMessage({ id: 'payment.ticket.type.' + data.type.toLowerCase() })
-    }));
-
-    if (yes) {
-      setDisabledSubmit(true);
-
-      const { tickets } = await dispatch({
-        type: 'movie/tickets',
-        payload: {
-          showId: data.showId
-        }
-      });
-
-      if (tickets >= data.count) {
-        const res = await dispatch({
-          type: 'movie/trading',
-          payload: data
+    if (window.confirm(formatMessage({ id: 'payment.privacy.notice' }))) {
+      const yes = window.confirm(formatMessage({ id: 'common.purchase.check' }, {
+        title: `${movie.title[locale]} ${show.date} ${show.time}`,
+        count: data.count,
+        email: data.email,
+        amount: Number(Number(data.count) * Number(show.price) * discount).toFixed(2),
+        ticketType: formatMessage({ id: 'payment.ticket.type.' + data.type.toLowerCase() })
+      }));
+  
+      if (yes) {
+        const { tickets } = await dispatch({
+          type: 'movie/tickets',
+          payload: {
+            showId: data.showId
+          }
         });
   
-        if (res && res.location) {
-          if (res.status === 'PENDING') {
-            alert(formatMessage({ id: 'error.code.708' }));
+        if (tickets >= data.count) {
+          const res = await dispatch({
+            type: 'movie/trading',
+            payload: data
+          });
+    
+          if (res && res.location) {
+            if (res.status === 'PENDING') {
+              alert(formatMessage({ id: 'error.code.708' }));
+            }
+    
+            window.location.href = res.location;
           }
-  
-          window.location.href = res.location;
+        } else {
+          alert(formatMessage({ id: 'error.code.705' }));
         }
-      } else {
-        alert(formatMessage({ id: 'error.code.705' }));
       }
-
-      setDisabledSubmit(false);
     }
+
   }
 
   return (

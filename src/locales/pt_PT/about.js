@@ -10,6 +10,17 @@ export default {
   "about.openhour.info.desc": "Terça a Domingo: 10am - 8pm(Encerra à Segunda) (Aberta aos feriados)",
   "about.openhour.ticket.title": "Bilheteira",
   "about.openhour.ticket.desc": "Terça a Domingo: 10am - 11:30pm(Encerra à Segunda) (Aberta aos feriados)",
+  "about.lease.title": "Arrendamento da Sala deProjecção & Exibição de publicidades",
+  "about.lease.desc": "Na Sala de Projecção foraminstalados 60 lugares, disponibilizando-se a Sala para realizar actividadesrelacionadas com a projecção de filmes ou para exibição de publicidade.",
+  "about.lease.fee.title": "Despesas:",
+  "about.lease.zoom.title": "Arrendamento da Sala deProjecção",
+  "about.lease.zoom.content": "<p>1. Períododa manhã（10:00-14:00）　 MOP800.00</p><p>2. Períododa tarde（14:00-18:00）         MOP900.00</p><p>3. Períododa noite（19:00-23:00）        MOP1,000.00</p>",
+  "about.lease.advert.title": "Exibição de publicidades",
+  "about.lease.advert.content": "(25 vezes) MOP 1,500.00",
+  "about.lease.pdf.1": "Normas Aplicáveis ao Arrendamento da Sala de Projecção da Cinemateca.pdf",
+  "about.lease.pdf.2": "Formulário do Requerimento para Arrendamento da Sala deProjecção da Cinemateca.pdf",
+  "about.lease.pdf.3": "Normas Aplicáveis ao Requerimento para Exibição dePublicidade na Cinemateca.pdf",
+  "about.lease.pdf.4": "Formulário do Requerimento para Exibição de Publicidadena Cinemateca.pdf",
 };
 
 

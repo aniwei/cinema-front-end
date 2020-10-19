@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, getLocale } from 'umi-plugin-react/locale';
 import classnames from 'classnames';
 import { Link } from 'umi';
 import { animated, useSpring, a } from 'react-spring';
@@ -32,12 +32,21 @@ export function usePrevious (value) {
 }
 
 export default function Menus (props) {
+  const locale = getLocale();
+
   const menuItems = [
-    { path: '/', text: formatMessage({ id: 'menus.home' }) },
-    { path: '/programme', text: formatMessage({ id: 'menus.programme' }) },
+    { path: `/?locale=${locale}`, text: formatMessage({ id: 'menus.home' }) },
+    { 
+      path: `/programme?locale=${locale}`, 
+      text: formatMessage({ id: 'menus.programme' }), 
+      routes: [
+        // { path: '/programme/sept', text: formatMessage({ id: 'menus.programme.sept' }) },  
+        { path: `/programme/oct?locale=${locale}`, text: formatMessage({ id: 'menus.programme.oct' }) }
+      ]  
+    },
     // { path: '/topic', text: formatMessage({ id: 'menus.topic' }) },
-    { path: '/news', text: formatMessage({ id: 'menus.news' }) },
-    { path: '/about', text: formatMessage({ id: 'menus.about' }) }
+    { path: `/news?locale=${locale}`, text: formatMessage({ id: 'menus.news' }) },
+    { path: `/about?locale=${locale}`, text: formatMessage({ id: 'menus.about' }) }
   ];
 
   const { expanded, onMenuItemClick, className } = props;
@@ -51,11 +60,24 @@ export default function Menus (props) {
       transform: `translate3d(${expanded ? 0 : 20}px,0,0)` }
     });
 
+  const [childExpanded, setChildExpanded] = useState(false);
+
   return <animated.div className={classnames(styles.nav_menus, className)} style={{ height: expanded && previous === expanded ? 'auto' : height, opacity }}>
     <a.div {...bind}  style={{ transform, display: 'inherit' }}>
       {
         menuItems.map(item => {
-          return <MenuItem key={item.path} {...item} onClick={(e) => onMenuItemClick(item, e)} />
+          return <MenuItem 
+            expanded={childExpanded} 
+            onChildExpanded={(expanded) => {
+              setChildExpanded(expanded);
+            }}
+            key={item.path} 
+            {...item} 
+            onClick={(e) => {
+              setChildExpanded(false);
+              onMenuItemClick(item, e);
+            }} 
+          />
         })
       }
     </a.div>
@@ -64,7 +86,37 @@ export default function Menus (props) {
 
 
 function MenuItem (props) {
+  const { path, routes, onChildExpanded } = props;
+  const [expanded, setExpanded] = useState(props.expanded);
+
+  useEffect(() => {
+    setExpanded(props.expanded);
+  }, [props.expanded])
+
+  const onLinkClick = (event) => {
+    if (path.indexOf('/programme') > -1 && routes && routes.length) {
+      event.preventDefault();
+      setExpanded(!expanded);
+      onChildExpanded(!expanded);
+
+      event.stopPropagation();
+    }
+  }
+
+  const onRouteClick = (event, route) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setExpanded(!expanded);
+    window.location.replace(route.path)
+  }
+
   return <div className={styles.menu_item} onClick={props.onClick}>
-    <Link className={styles.menu_link} to={props.path}>{props.text}</Link>
+    <Link className={styles.menu_link} to={props.path} onClick={onLinkClick}>{props.text}</Link>
+    {
+      routes && routes.length > 0 &&<div className={classnames(styles.menu_item_popup, { [styles.menu_item_expanded]: expanded  })}>  
+	{routes.map(route => <Link onClick={(event) => onRouteClick(event, route)} className={styles.menu_item_popup_link} to={route.path}>{route.text}</Link>)}
+      </div>
+    }
   </div>
 }

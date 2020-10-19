@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { HeaderLayout, FooterLayout } from '../../components';
 
 class BasicLayout extends PureComponent {
+  
 
   render() {
     return (

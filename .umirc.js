@@ -86,8 +86,16 @@ export default {
             {
               path: '/programme',
               name: 'programme',
-              component: './Programme'
+              exact: true,
+              component: './Programme',
             },
+            {
+              path: '/programme/:releasedAt',
+              name: 'programme',
+              exact: true,
+              component: './Programme',
+            },
+            
             {
               path: '/poster/:id',
               name: 'poster',

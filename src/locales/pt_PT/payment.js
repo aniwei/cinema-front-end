@@ -15,5 +15,6 @@ export default {
   'payment.ticket.rate.C': 'Não aconselhável a menores de 18 anos, mas interdito a menores de 13 anos',
   'payment.ticket.rate.D': 'Interdito a menores de 18 anos ',
   'payment.notice.desc': 'Ver ofertas concessionadas',
+  'payment.privacy.notice': '■ Os dados são transferidos para servidores da Alibaba Cloud de Hong Kong para fins de armazenamento e os dados são encriptados no modo KMS. Respeitamos e protegemos absolutamente a privacidade dos utilizadores do website.'
 }
   

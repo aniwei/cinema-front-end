@@ -19,6 +19,7 @@ export default {
   'common.movie.color': 'Cores',
   'common.movie.blackwhite': 'Preto e branco',
   'footer.about.title': 'Sobre nós',
+  'common.movie.min': 'min',
   'footer.about.desc': 'Situada na Travessa da Paixão no.º 9 - 13, perto das Ruínas de S. Paulo, inscritas na Lista do Património Mundial, a Cinemateca ∙ Paixão está instalada num edifício de três andares multifuncional, que inclui a projecção de filmes, espaço para exibições, espaços de informação dos filmes, armazenamento de vídeos locais, assim como espaços para a leitura de livros relativos ao cinema.',
   'footer.about.address': 'Travessa da Paixão No. 9-13',
   'footer.about.address.title': 'Localização',

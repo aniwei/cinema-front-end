@@ -20,6 +20,9 @@ export default function (path, options = {}) {
     return Promise.reject(res);
   }).catch(error => {
     const { code } = error;
-    alert(formatMessage({ id: 'error.code.' + code }))
+
+    if (code) {
+      alert(formatMessage({ id: 'error.code.' + code }))
+    }
   })
 };

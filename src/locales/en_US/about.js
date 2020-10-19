@@ -10,6 +10,8 @@ export default {
   "about.openhour.info.desc": "Tuesday to Sunday: 10am - 11:30pm (Closed on Mondays) (Open on public holidays)",
   "about.openhour.ticket.title": "Ticket Office",
   "about.openhour.ticket.desc": "Tuesday to Sunday: 10am - 8pm (Closed on Mondays) (Open on public holidays)",
+  "about.lease.title": "",
+  "about.lease.desc": "",
 };
 
 

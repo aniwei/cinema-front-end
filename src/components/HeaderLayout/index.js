@@ -53,7 +53,7 @@ function NavBar (props) {
         <Logo />
 
         <Menus expanded className={styles.nav_menus_primary} onMenuItemClick={() => {}} />
-        <Language className={styles.langs_primary} />
+        <Language {...props}  className={styles.langs_primary} />
         <MenuButton onClick={onMenuButtonClick} />
       </div>
 
@@ -63,7 +63,7 @@ function NavBar (props) {
           onMenuItemClick={onMenuItemClick}
         />
 
-        {expanded && <Language />}
+        {expanded && <Language { ...props} />}
       </div>
     </nav>
   )
@@ -72,7 +72,7 @@ function NavBar (props) {
 export default function (props) {
   return (
     <header className={styles.header}>
-      <NavBar />
+      <NavBar {...props} />
     </header>
   )
 }

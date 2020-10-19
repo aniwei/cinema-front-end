@@ -32,7 +32,7 @@ function Movie (props) {
 
     dispatch({ type: 'AdminTicket/movies' });
     
-  }, [props]);
+  }, []);
 
   const { movies } = props;
 

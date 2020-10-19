@@ -14,6 +14,7 @@ export default {
   'payment.ticket.rate.B': '未滿十三歲不宜觀看',
   'payment.ticket.rate.C': '未滿十八歳不宜觀看，十三歲以下禁止觀看',
   'payment.ticket.rate.D': '未滿十八歲禁止觀看',
-  'payment.notice.desc': '查看優惠事項'
+  'payment.notice.desc': '查看優惠事項',
+  'payment.privacy.notice': '■ 數據轉移到香港伺服器阿里雲作儲存用途，所有數據是KMS加密。所以我們對網站使用者的個人的隱私權，絕對尊重並予以保護。'
 }
   

@@ -11,7 +11,38 @@
   }
 
   .film_detail {
-    
+    .detail_chunk {
+      padding: 30px;
+      border-bottom: 1px solid #ffefdc;
+
+      .chunk_title {
+        font-size: 18px;
+        // text-align: center;
+      }
+
+      .chunk_meta {
+        margin: 15px 0;
+        color: #202020;
+        // text-align: center;
+
+        span {
+          margin: 5px 0;
+        }
+      }
+
+      .chunk_desc {
+        margin: 15px 0;
+
+        .chunk_desc_title {
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+
+        .chunk_desc_content {
+          color: #202020;
+        }
+      }
+    }
 
     .detail_trailer,
     .detail_stills,
@@ -20,7 +51,13 @@
       padding: 30px;
     }
 
+    .movies_stills {
+      padding: 30px;
+    }
+
     .detail_trailer {
+      padding: 30px;
+
       .iframe {
         width: 100%;
         height: 200px;
@@ -39,7 +76,7 @@
     }
 
     .detail_stills_content {
-      width: 100%;
+      padding: 30px;
       margin: auto;
     }
 
@@ -56,6 +93,20 @@
       font-size: 14px;
       line-height: 2;
       white-space: pre-wrap;
+    }
+  }
+
+  .trailers {
+    padding: 30px;
+    position: relative;
+
+    .swiper_trailer {
+
+    }
+
+    .iframe {
+      width: 100%;
+      height: 200px;
     }
   }
 
@@ -110,6 +161,10 @@
         opacity: 0.8;
         width: 50%;
         margin: auto;
+
+        span {
+          margin: 0 5px;
+        }
       }
     }
 
@@ -210,12 +265,19 @@
     z-index: 1;
 
     .shows_header {
-      display: flex;
       border-bottom: 1px solid #eee;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .shows_header_inner {
+      overflow-x: auto;
+      overflow-y: hidden;
     }
 
     .show_item {
-      padding: 10px;
+      float: left;
+      padding: 10px 7px;
       height: 45px;
       line-height: 25px;
       box-sizing: border-box;
@@ -313,6 +375,10 @@
         .iframe {
           height: 500px;
         }
+      }
+
+      .iframe {
+        height: 500px;
       }
     }
 

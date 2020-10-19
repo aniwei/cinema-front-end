@@ -20,7 +20,7 @@ export const dva = {
       }
 
       console.error(error.message);
-      alert(error.message);
+      // alert(error.message);
     },
   },
 };
