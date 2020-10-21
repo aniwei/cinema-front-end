@@ -91,3 +91,17 @@
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0 10px;
 }
+
+body .Cal__Today__root .Cal__Today__chevron {
+  margin-left: 55px;
+}
+
+body .Cal__Month__rows {
+  /* background: linear-gradient(135deg,#f8b4b3,#fff1c2); */
+  background: transparent;
+}
+
+body .Cal__Day__root.Cal__Day__enabled {
+  color: #202020;
+  font-weight: 400;
+}
