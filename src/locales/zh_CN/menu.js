@@ -5,5 +5,6 @@ export default {
   "menus.news": "最新消息",
   "menus.about": "关于本馆",
   "menus.programme.sept": "九月片单",
-  "menus.programme.oct": "十月片单"
+  "menus.programme.oct": "十月片单",
+  "menus.programme.nov": "十一月片单"
 };

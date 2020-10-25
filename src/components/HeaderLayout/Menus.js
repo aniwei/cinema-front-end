@@ -40,8 +40,8 @@ export default function Menus (props) {
       path: `/programme?locale=${locale}`, 
       text: formatMessage({ id: 'menus.programme' }), 
       routes: [
-        // { path: '/programme/sept', text: formatMessage({ id: 'menus.programme.sept' }) },  
-        { path: `/programme/oct?locale=${locale}`, text: formatMessage({ id: 'menus.programme.oct' }) }
+        { path: `/programme/oct?locale=${locale}`, text: formatMessage({ id: 'menus.programme.oct' }) },
+        { path: `/programme/nov?locale=${locale}`, text: formatMessage({ id: 'menus.programme.nov' }) },  
       ]  
     },
     // { path: '/topic', text: formatMessage({ id: 'menus.topic' }) },

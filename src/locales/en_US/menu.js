@@ -5,5 +5,6 @@ export default {
   "menus.news": "Latest News",
   "menus.about": "About Us",
   "menus.programme.sept": "September Programme",
-  "menus.programme.oct": "October Programme"
+  "menus.programme.oct": "October Programme",
+  "menus.programme.nov": "November Programme",
 };
