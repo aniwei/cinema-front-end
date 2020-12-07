@@ -90,7 +90,7 @@ export default {
               component: './Programme',
             },
             {
-              path: '/programme/:movieId',
+              path: '/programme/:releasedAt',
               name: 'programme',
               exact: true,
               component: './Programme/Detail',

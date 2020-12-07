@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import styles from './index.less';
 import Socials from './Socials';
-import { formatMessage } from 'umi-plugin-react/locale';
+import { formatMessage, getLocale } from 'umi-plugin-react/locale';
 
 function GoogleMap () {
   return (
@@ -38,6 +38,18 @@ function Contact () {
   )
 }
 
+function Profile () {
+  const locale = getLocale();
+
+  return (
+    <div className={styles.profile}>
+      <a className={styles.profile_pdf} href={`//cinematheque.oss-cn-hongkong.aliyuncs.com/profile/${locale}.pdf`}>
+        {formatMessage({ id: 'footer.about.profile' })}
+      </a>
+    </div>
+  )
+}
+
 export default function FooterLayout () {
   return (
     <footer className={styles.footer}>
@@ -46,6 +58,8 @@ export default function FooterLayout () {
       <Contact />
 
       <Socials />
+
+      <Profile />
 
       <div className={styles.footer_rights}>
         戀愛・電影館 Cinematheque・Passion © 2020

@@ -6,5 +6,6 @@ export default {
   'programme.shows.empty': 'Sem arranjos',
   'programme.shows.buy.button': 'Comprar',
   'programme.shows.sellout': 'Esgotado',
-  'programme.shows.off': 'Indisponível para venda'
+  'programme.shows.off': 'Indisponível para venda',
+  'programme.view': 'Reproduzir vídeo'
 }

@@ -5,6 +5,14 @@ export function movies (params) {
   return fetch(`/movie?${qs.stringify(params)}`);
 }
 
+export function categories (params) {
+  return fetch(`/category?${qs.stringify(params)}`);
+}
+
+export function category (params) {
+  return fetch(`/category?${qs.stringify(params)}`);
+}
+
 export function code ({ email }) {
   return fetch(`/common/code?email=${email}`);
 }
@@ -19,6 +27,13 @@ export function tickets ({ showId }) {
 
 export function trading (body) {
   return fetch(`/trading`, {
+    method: 'post',
+    body: JSON.stringify(body)
+  });
+}
+
+export function creditMaster (body) {
+  return fetch(`/credit/master`, {
     method: 'post',
     body: JSON.stringify(body)
   });

@@ -167,12 +167,28 @@
     }
   }
 
-  .payment_mpay {
+  .payment {
     display: flex;
+
+  }
+
+  .payment_item {
+    display: flex;
+    flex: 1;
     flex-direction: column;
     padding: 10px;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     background: #ffffff;
+    text-align: center;
+    margin-right: 10px;
+
+    .img {
+      width: 90px;
+    }
+  }
+
+  .payment_item_selected {
+    border-color: #f35252;
   }
 
   .payment_tips {
@@ -232,6 +248,13 @@
     white-space: pre-wrap;
     line-height: 1.5;
     display: block;
+  }
+
+  .notice_profile {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 15px 0;
+    display: none;
   }
 
   .notice_desc {
@@ -342,6 +365,10 @@
     }
 
     .notice_desc {
+      display: block;
+    }
+
+    .notice_profile {
       display: block;
     }
 

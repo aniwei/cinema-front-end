@@ -39,10 +39,10 @@ export default function Menus (props) {
     { 
       path: `/programme?locale=${locale}`, 
       text: formatMessage({ id: 'menus.programme' }), 
-      routes: [
-        { path: `/programme/oct?locale=${locale}`, text: formatMessage({ id: 'menus.programme.oct' }) },
-        { path: `/programme/nov?locale=${locale}`, text: formatMessage({ id: 'menus.programme.nov' }) },  
-      ]  
+      // routes: [
+      //   { path: `/programme/oct?locale=${locale}`, text: formatMessage({ id: 'menus.programme.oct' }) },
+      //   { path: `/programme/nov?locale=${locale}`, text: formatMessage({ id: 'menus.programme.nov' }) },  
+      // ]  
     },
     // { path: '/topic', text: formatMessage({ id: 'menus.topic' }) },
     { path: `/news?locale=${locale}`, text: formatMessage({ id: 'menus.news' }) },

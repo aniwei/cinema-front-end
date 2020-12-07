@@ -4,9 +4,12 @@ import { getLocale, formatMessage } from 'umi-plugin-react/locale';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 
+import checkout from './checkout';
+
 import styles from './index.less';
 
 import mpayLogo from '../../assets/common/mpay.png';
+import masterAndVisa from '../../assets/common/master_visa.jpeg';
 
 const discounts = {
   ORIGINAL: 1,
@@ -18,8 +21,14 @@ const notice = {
   zh_CN: `【注意事项】\n\n- 凡购买优惠票者，入场前请出示有效证件。\n- 网上8折优惠只限于一次性购买同一场次普通票十张。\n- 优惠票与折扣优惠不能重叠使用。`,
   zh_MO: `【注意事項】\n\n- 凡購買優惠票者，入場前請出示有效證件。\n- 網上8折優惠只限於一次性購買同一場次普通票十張。\n- 優惠票與折扣優惠不能重疊使用。`,
   en_US: `【Notice】\n\n- For those who purchase concessionary tickets, a valid proof of identity must be shown before entering the venue.\n- A 20% discount is offered to the individual who purchases 10 regular tickets for the same session at each online transactions.\n- Concessionary tickets and discount offers cannot overlap.`,
-  pt_PT: `【Aviso】\n\n- Para quem comprar bilhetes concessionados, por favor, mostre um documento válido antes entrar no cinema.\n- Na compra de 10 bilhetes regulares da mesma sessão, é oferecido 20% de desconto, em cada transação online.\n- Os bilhetes concessionados e as ofertas de desconto não podem ser acumuladas.
-  `
+  pt_PT: `【Aviso】\n\n- Para quem comprar bilhetes concessionados, por favor, mostre um documento válido antes entrar no cinema.\n- Na compra de 10 bilhetes regulares da mesma sessão, é oferecido 20% de desconto, em cada transação online.\n- Os bilhetes concessionados e as ofertas de desconto não podem ser acumuladas.`
+}
+
+const profile = {
+  zh_CN: `- <span style="color: #000">购票前请先阅读<a style="color: #007aff" href="//cinematheque.oss-cn-hongkong.aliyuncs.com/profile/zh_CN.pdf">「收集个人资料声明」</a>，输入电邮并按下「获取」按钮后代表同意有关声明。</span>`,
+  zh_MO: `- <span style="color: #000">購票前請先閱讀<a style="color: #007aff" href="//cinematheque.oss-cn-hongkong.aliyuncs.com/profile/zh_MO.pdf">「收集個人資料聲明」</a>，輸入電郵並按下「獲取」按鈕後代表同意有關聲明。</span>`,
+  en_US: `- <span style="color: #000">Please read the <a style="color: #007aff" href="//cinematheque.oss-cn-hongkong.aliyuncs.com/profile/en_US.pdf">"Statement on Collection of Personal Data"</a> before purchasing tickets, enter your email and press the "Send" button to agree to the statement.</span>`,
+  pt_PT: `- <span style="color: #000">Por favor, leia a <a style="color: #007aff" href="//cinematheque.oss-cn-hongkong.aliyuncs.com/profile/pt_PT.pdf">"Declaração de recolha de dados pessoais"</a> antes da compra dos bilhetes, introduza o seu email e pressione “Obter” para concordar com a declaração.</span>`
 }
 
 function TicketType ({ show, onSelect }) {
@@ -64,7 +73,7 @@ function Show (props) {
 
   const { movie, date, time, tickets } = props;
   return <div className={styles.purchase_show}>
-    <div>{movie.title[locale]} {date} {time}</div>
+    
     <div>{formatMessage({ id: 'payment.remaining.tickets' })} {tickets}</div> 
   </div>
 }
@@ -141,7 +150,10 @@ function Movie (props) {
       }}>
         <span>{formatMessage({ id: 'payment.notice.desc' })}</span>
       </div>
-      <div className={styles.notice_item} dangerouslySetInnerHTML={{ __html: notice[locale] }}></div>
+      <div className={styles.notice_item}>
+        <p dangerouslySetInnerHTML={{ __html: notice[locale] }}></p>
+        <p dangerouslySetInnerHTML={{ __html: profile[locale] }}></p>
+      </div>
     </div>
   )
 }
@@ -226,11 +238,41 @@ function Email ({ show, onInputEmail, onInputCode, dispatch }) {
   )
 }
 
-function MPay () {
+function MPay (props) {
   return (
-    <div className={styles.payment_mpay}>
+    <div className={classnames(styles.payment_item, {
+      [styles.payment_item_selected]: props.selected
+    })} {...props}>
       <img src={mpayLogo} className={styles.img} />
       {/* <span className={styles.text}>{formatMessage({ id: 'common.payment.mpay.tips' })}</span> */}
+    </div>
+  );
+}
+
+function MasterAndVisa (props) {
+  return (
+    <div className={classnames(styles.payment_item, {
+      [styles.payment_item_selected]: props.selected
+    })} {...props}>
+      <img src={masterAndVisa} className={styles.img} />
+      {/* <span className={styles.text}>{formatMessage({ id: 'common.payment.mpay.tips' })}</span> */}
+    </div>
+  );
+}
+
+function Payments (props) {
+  const onMPayClick = () => {
+    props.onChange('MPAY');
+  }
+
+  const onMasterAndVisaClick = () => {
+    props.onChange('MASTER_VISA');
+  }
+
+  return (
+    <div className={styles.payment}>
+      <MPay onClick={onMPayClick} selected={props.value === 'MPAY'} />
+      <MasterAndVisa onClick={onMasterAndVisaClick} selected={props.value === 'MASTER_VISA'} />
     </div>
   );
 }
@@ -278,8 +320,9 @@ function Counter ({ show, onCounting }) {
   </div>
 }
 
-function Form ({ show, movie, onClose, dispatch }) {
+function Form ({ show, movie, onClose, dispatch, location }) {
   const [disabledSubmit, setDisabledSubmit] = useState(false);
+  const [payment, setPayment] = useState('MPAY')
   const locale = getLocale();
   const data = useMemo(() => {
     return {
@@ -310,6 +353,10 @@ function Form ({ show, movie, onClose, dispatch }) {
     data.type = type;
   }
 
+  const onPaymentChange = (payment) => {
+    setPayment(payment)
+  }
+
   const onConfirm = async () => {
 
     if (disabledSubmit) {
@@ -336,8 +383,10 @@ function Form ({ show, movie, onClose, dispatch }) {
       }
     }
 
+    data.description = `${movie.title[locale]} ${show.date} ${show.time}`;
+
     if (window.confirm(formatMessage({ id: 'payment.privacy.notice' }))) {
-      const yes = window.confirm(formatMessage({ id: 'common.purchase.check' }, {
+      const yes = window.confirm(formatMessage({ id: payment === 'MPAY' ? 'common.purchase.mpay.check' : 'common.purchase.masterPay.check' }, {
         title: `${movie.title[locale]} ${show.date} ${show.time}`,
         count: data.count,
         email: data.email,
@@ -354,18 +403,53 @@ function Form ({ show, movie, onClose, dispatch }) {
         });
   
         if (tickets >= data.count) {
-          const res = await dispatch({
+          const action = payment === 'MPAY' ? {
             type: 'movie/trading',
             payload: data
-          });
-    
-          if (res && res.location) {
-            if (res.status === 'PENDING') {
-              alert(formatMessage({ id: 'error.code.708' }));
-            }
-    
-            window.location.href = res.location;
+          } : {
+            type: 'movie/creditMaster',
+            payload: data
           }
+
+          const res = await dispatch(action);
+
+          if (payment === 'MPAY') {
+            if (res && res.location) {
+              if (res.status === 'PENDING') {
+                alert(formatMessage({ id: 'error.code.708' }));
+              }
+      
+              window.location.href = res.location;
+            }
+          } else {
+            const { orderId, currency, amount, session, merchantId } = res;
+
+            window.Checkout.configure({
+              merchant: merchantId,
+              order: {
+                amount,
+                currency,
+                description: `${movie.title[locale]} ${show.date} ${show.time}`,
+                id: orderId,
+              },
+              interaction: {
+                operation: 'PURCHASE',
+                locale,
+                merchant: {
+                  name: formatMessage({ id: 'common.merchant.name' }),
+                  address: {
+                    line1: formatMessage({ id: 'common.merchant.address' }),
+                  }
+                }
+              },
+              session: {
+                id: session.id
+              }
+            });
+
+            window.Checkout.showPaymentPage();
+          }
+    
         } else {
           alert(formatMessage({ id: 'error.code.705' }));
         }
@@ -375,21 +459,26 @@ function Form ({ show, movie, onClose, dispatch }) {
   }
 
   return (
-    <div className={styles.form}>
-      <Email 
-        onInputEmail={onInputEmail}
-        onInputCode={onInputCode}
-        dispatch={dispatch}
-      />
-      <Show {...show} movie={movie} />
-      <TicketType show={show} onSelect={onTicketTypeSelect} />
-      <Counter onCounting={onCounting} show={show} />
+    <>
+      <Payments {...show} movie={movie} onChange ={onPaymentChange} value={payment} />
+      <div className={styles.form}>
+        <Email 
+          onInputEmail={onInputEmail}
+          onInputCode={onInputCode}
+          dispatch={dispatch}
+        />
+        <Show {...show} movie={movie} />
+        <TicketType show={show} onSelect={onTicketTypeSelect} />
+        <Counter onCounting={onCounting} show={show} />
 
-      <div className={styles.button_item}>
-        <button onClick={onClose} className={classnames(styles.button, styles.cancel_button)}>{formatMessage({ id: 'common.purchase.cancel.button' })}</button>
-        <button onClick={onConfirm} className={classnames({ [styles.button_disabled]: disabledSubmit }, styles.button)}>{formatMessage({ id: 'common.purchase.buy.button' })}</button>
+        <div className={styles.notice_profile} dangerouslySetInnerHTML={{ __html: profile[locale] }}></div>
+
+        <div className={styles.button_item}>
+          <button onClick={onClose} className={classnames(styles.button, styles.cancel_button)}>{formatMessage({ id: 'common.purchase.cancel.button' })}</button>
+          <button onClick={onConfirm} className={classnames({ [styles.button_disabled]: disabledSubmit }, styles.button)}>{formatMessage({ id: 'common.purchase.buy.button' })}</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -408,7 +497,6 @@ function Purchase (props) {
           <Movie {...movie} />
 
           <div className={styles.purchase_payment}>
-            <MPay />
             <Form {...props} show={show} movie={movie} onClose={onClose} />
           </div>
         </div>

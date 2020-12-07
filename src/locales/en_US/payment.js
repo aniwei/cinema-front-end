@@ -15,5 +15,5 @@ export default {
   'payment.ticket.rate.C': 'For persons aged 13 and above only, but not suitable for age under 18',
   'payment.ticket.rate.D': 'Persons aged 18 and above only',
   'payment.notice.desc': 'View concessionary offers',
-  'payment.privacy.notice': '■ Data is transferred to Hong Kong Alibaba Cloud servers for storage purposes and the data is KMS encrypted. We absolutely respect and protect the privacy of the users of the website.'
+  'payment.privacy.notice': '■ Data is transferred to Hong Kong Alibaba Cloud servers for storage purposes and the data is KMS encrypted. We absolutely respect and protect the privacy of the users of the website.\n\nPress "OK" to agree the relevant data transfer.'
 }

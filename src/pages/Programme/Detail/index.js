@@ -258,7 +258,9 @@ function Movies (props) {
     slidesPerView: 3,
     centeredSlides: true,
     on: {
-      slideChange: onChange
+      slideChange: function (...argv) {
+        onChange.call(this, ...argv);
+      }
     },
     navigation: {
       nextEl: '.swiper-button-next',
@@ -294,7 +296,7 @@ function Movies (props) {
 
   return (
     <div className={styles.hot}>
-      <div className={styles.background} style={{ backgroundImage: `url(${movie.poster})` }} />
+      <div className={styles.background} style={{ backgroundImage: `url(${movie.poster}?x-oss-process=image/crop)` }} />
       <div className={styles.hot_content}>
         
         <Swiper {...swiperOptions} ref={ref}>
@@ -306,7 +308,7 @@ function Movies (props) {
                   <div className={styles.inner}>
                     <Movie 
                       className={styles.foreground}
-                      poster={movie.poster}
+                      poster={movie.poster + '?x-oss-process=image/crop'}
                     />
                   </div>
                 </div>
@@ -480,7 +482,9 @@ function Shows (props) {
   const movieShows = movie.shows || [];
   const dates = new Map();
 
-  movieShows.forEach(show => {
+  movieShows.filter(show => {
+    return show.status !== 'REMOVE'
+  }).forEach(show => {
     let date = dates.get(show.date);
 
     if (!date) {
@@ -501,7 +505,7 @@ function Shows (props) {
 }
 
 function Programme (props) {
-  const { match } = props;
+  const { match, location, history } = props;
   const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState(movies[0]);
 
@@ -511,12 +515,22 @@ function Programme (props) {
     const { releasedAt } = match.params;
 
     const getMovies = async () => {
-      const movies = await dispatch({
-        type: 'movie/movies',
-        payload: { ...query, releasedAt }
-      });
+      if (releasedAt === 'category') {
+        const movies = await dispatch({
+          type: 'movie/category',
+          payload: { ...query, id: query.categoryId }
+        });
+  
+        setMovies(movies);
+      } else {
+        const movies = await dispatch({
+          type: 'movie/movies',
+          payload: { ...query, releasedAt: releasedAt }
+        });
+  
+        setMovies(movies);
+      }
 
-      setMovies(movies);
     }
     
     getMovies();
@@ -549,7 +563,9 @@ function Programme (props) {
   }, []);
 
   const onChange = function () {
-    setMovie(movies[this.activeIndex]);
+    const movie = movies[this.activeIndex];
+    setMovie(movie);
+    history.push(`/programme/${match.params.releasedAt}?categoryId=${movie.categoryId || ''}&objectId=${movie.objectId}&filmName=${movie.title.en_US.split(/\s+/g).join('-')}`)
   }
 
   if (movie && movie.compose && !movie.isComputed) {
@@ -570,6 +586,8 @@ function Programme (props) {
   );
 }
 
-export default connect(({ movie, router }) => ({
-  movies: movie.movies,
-}))(Programme);
+export default connect(({ movie, router }) => {
+  return {
+    movies: movie.movies,
+  }
+})(Programme);

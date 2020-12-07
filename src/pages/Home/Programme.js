@@ -15,7 +15,7 @@ function Movie (props) {
   return (
     <div className={classnames(styles.film, className)}>
       <div className={styles.poster}>
-        <img src={poster} />
+        <img src={poster + '?x-oss-process=image/crop'} />
       </div>
     </div>
   )
@@ -89,7 +89,7 @@ function Movies (props) {
   return (
     <div className={styles.hot}>
       {/* <h2 className={styles.programme_tilte}>{formatMessage({ id: 'home.programme.title' })}</h2> */}
-      <div className={styles.background} style={{ backgroundImage: `url(${movie.poster})` }} />
+      <div className={styles.background} style={{ backgroundImage: `url(${movie.poster}?x-oss-process=image/crop)` }} />
       <div className={styles.hot_content}>
         
         <Swiper {...swiperOptions} ref={ref}>

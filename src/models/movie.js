@@ -1,11 +1,12 @@
 import { history } from 'umi';
-import { movies, shows, trading, code, tickets } from 'services/movie';
+import { movies, shows, trading, creditMaster, code, tickets, categories, category } from 'services/movie';
 
 export default {
   namespace: 'movie',
 
   state: {
-    movies: []
+    movies: [],
+    categories: null,
   },
 
   effects: {
@@ -22,6 +23,16 @@ export default {
       return response;
     },
 
+    *creditMaster({ payload }, { call, put }) {
+      const response = yield call(creditMaster, payload);
+
+      if (response) {
+        return response;
+      }
+
+      return false;
+    },
+
     *trading({ payload }, { call, put }) {
       const response = yield call(trading, payload);
 
@@ -30,6 +41,99 @@ export default {
       }
 
       return false;
+    },
+
+    *category({ payload }, { call, put }) {
+      const response = yield call(category, payload);
+
+      if (response.category.movies && response.category.movies.length > 0){
+        const movies = response.category.movies.slice();
+        const groups = new Map();
+
+        const composes = response.category.movies.filter(movie => {
+          return movie.compose;
+        });
+
+        composes.forEach(movie => {
+          let movies = groups.get(movie.composeId);
+
+          if (!movies) {
+            groups.set(movie.composeId, movies = []);
+          }
+
+          movies[movie.composeIndex - 1] = movie;
+
+          if (movie.composeIndex - 1 === 0) {
+            movie.groups = movies;
+          }
+        });
+
+        response.category.movies.forEach((movie, index) => {
+          movie.categoryId = response.category.objectId;
+          if (movie.compose) {
+            if (movie.composeIndex - 1 > 0) {
+              const indexOf = movies.indexOf(movie);
+              movies.splice(indexOf, 1);
+            }
+          }
+        });
+  
+        return movies.map((movie, index) => {
+          movie.index = index;
+          return movie;
+        });
+      }
+    },
+
+    *categories({ payload }, { call, put }) {
+      const response = yield call(categories, payload);
+
+      response.categories.forEach(category => {
+        const movies = category.movies.slice();
+        const groups = new Map();
+
+        const composes = category.movies.filter(movie => {
+          return movie.compose;
+        });
+
+        composes.forEach(movie => {
+          let movies = groups.get(movie.composeId);
+
+          if (!movies) {
+            groups.set(movie.composeId, movies = []);
+          }
+
+          movies[movie.composeIndex - 1] = movie;
+
+          if (movie.composeIndex - 1 === 0) {
+            movie.groups = movies;
+          }
+        });
+
+        category.movies.forEach((movie, index) => {
+          if (movie.compose) {
+            if (movie.composeIndex - 1 > 0) {
+              const indexOf = movies.indexOf(movie);
+              movies.splice(indexOf, 1);
+            }
+          }
+        });
+  
+        category.movies = movies.map((movie, index) => {
+          movie.index = index;
+          return movie;
+        });
+      })
+
+
+      yield put({
+        type: 'updateState',
+        payload: {
+          categories: response.categories
+        }
+      });
+ 
+      return response.categories
     },
 
     // 用户信息

@@ -14,9 +14,7 @@ export default function (props) {
   const { 
     trade_status, 
     body, 
-    subject, 
     out_trade_no, 
-    buyer_email, 
     trade_no,
     buyer_pay_amount 
   } = query;
@@ -42,9 +40,11 @@ export default function (props) {
         }
       </h1>
 
-      <div className={styles.payment_desc}>
-        {formatMessage({ id: 'payment.reminder' })}
-      </div>
+      {
+        isSuccess && <div className={styles.payment_desc}>
+          {formatMessage({ id: 'payment.reminder' })}
+        </div>
+      }
 
       <div className={styles.payment_content}>
         <div className={styles.payment_item}>
@@ -55,14 +55,17 @@ export default function (props) {
             {body}
           </div>
         </div>
-        <div className={styles.payment_item}>
-          <div className={styles.payment_item_label}>
-            {formatMessage({ id: 'payment.content.tradeNumber'})}
+        {
+          trade_no && <div className={styles.payment_item}>
+            <div className={styles.payment_item_label}>
+              {formatMessage({ id: 'payment.content.tradeNumber'})}
+            </div>
+            <div className={styles.payment_item_value}>
+              {trade_no}
+            </div>
           </div>
-          <div className={styles.payment_item_value}>
-            {trade_no}
-          </div>
-        </div>
+        }
+        
 
         <div className={styles.payment_item}>
           <div className={styles.payment_item_label}>
