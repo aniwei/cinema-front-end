@@ -7,9 +7,9 @@ export default {
   "about.feature.planing": "Based on the above positioning and target audience, Cinematheque．Passion’s programming takes care of artistic and cultural aspects and strives to providing a diversified choice of movies. By maximizing the audience base, we will try to cater to the needs of audience with different ages and favorites; make the cinematheque a sharing platform for filmmakers, film critics and general public.",
   "about.openhour.title": "Opening Hours",
   "about.openhour.info.title": "Exhibition Hall and Film Information Hall",
-  "about.openhour.info.desc": "Tuesday to Sunday: 10am - 11:30pm (Closed on Mondays) (Open on public holidays)",
+  "about.openhour.info.desc": "Tuesday to Sunday: 10am - 8pm (Closed on Mondays) (Open on public holidays)",
   "about.openhour.ticket.title": "Ticket Office",
-  "about.openhour.ticket.desc": "Tuesday to Sunday: 10am - 8pm (Closed on Mondays) (Open on public holidays)",
+  "about.openhour.ticket.desc": "Tuesday to Sunday: 10am - 11:30pm (Closed on Mondays) (Open on public holidays)",
   "about.lease.title": "",
   "about.lease.desc": "",
 };

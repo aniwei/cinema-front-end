@@ -423,6 +423,10 @@ function Form ({ show, movie, onClose, dispatch, location }) {
             }
           } else {
             const { orderId, currency, amount, session, merchantId } = res;
+            let currentLocale = locale.replace('_', '-');
+            if (locale === 'zh_MO') {
+              currentLocale = 'zh-HK';
+            }
 
             window.Checkout.configure({
               merchant: merchantId,
@@ -434,7 +438,7 @@ function Form ({ show, movie, onClose, dispatch, location }) {
               },
               interaction: {
                 operation: 'PURCHASE',
-                locale,
+                locale: currentLocale,
                 merchant: {
                   name: formatMessage({ id: 'common.merchant.name' }),
                   address: {
